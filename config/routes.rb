@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'about' => 'home#about'
   
   #homeコントローラーに入れるべきか新たにコントローラー作成するか保留中
-  get 'top_controller' =>
+  #TODO: get 'top_controller' =>
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
