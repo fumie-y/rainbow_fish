@@ -1,1 +1,65 @@
-<h1>edit</h1>
+<div class='main users-edit'>
+  <div class='elements'>
+    <div class='form-heading'>アカウント編集</div>
+    <div class='col-md-3 col-sm-4 col-xs-12'>
+      <div class='post-elements'>
+       <div class='post-element'>
+        <div class='profile-account'>
+          <!-- #TODO: イメージ画像は仮です -->
+          <img src="/images/pathToYourImage.png" class="img-fluid" alt="Responsive image">
+          <h3 class='<%= @user.name %>'></h3>
+          <div class="btn-group-vertical" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-dark">投稿写真一覧</button>
+            <button type="button" class="btn btn-outline-dark">いいね！した数</button>
+            <button type="button" class="btn btn-outline-dark">新規投稿</button>
+          </div>
+        </div>
+       </div>
+      </div>
+    </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="#!">プロフィール</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#!">パスワード変更</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#!">退会</a>
+      </li>
+    </ul>
+
+    <!-- #TODO: プロフィール -->
+    <form>
+      <div class="form-group">
+        <label for="formGroupExampleInput">ユーザー名</label>
+        <input type="text" class="form-control" id="formGroupExampleInput">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">プロフィール画像</label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+      <button type="button" class="btn btn-primary">更新</button>
+    </form>
+    <!-- #TODO: パスワード変更 -->
+    <form>
+      <div class="form-group">
+        <label for="formGroupExampleInput">現在のパスワード</label>
+        <input type="text" class="form-control" id="formGroupExampleInput">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">新しいパスワード</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2">
+      </div>
+      <button type="button" class="btn btn-primary">更新</button>
+    </form>
+    <!-- ＃TODO: 退会 -->
+    <form>
+      <div class="form-group">
+        <P>退会しますか？</P>
+        <button type="button" class="btn btn-outline-secondary">いいえ</button>
+        <button type="button" class="btn btn-outline-secondary">はい</button>
+      </div>
+    </form>
+  </div>
+</div>
