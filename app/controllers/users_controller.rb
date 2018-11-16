@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @photo = Photo.find(params[:id])
-    @tag = Tag.find(params[:id])
+    @photo = Photo.find_by(params[:user_id])
+    @tag = Tag.find_by(params[:user_id])
   end
 
   def likes_photos
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    
   end
 
   def login_form
