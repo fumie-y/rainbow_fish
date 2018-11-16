@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :photos
+
   get 'login' => 'users#login_form'
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'
-
   get 'destroy' =>  'users#destroy_form'
   post 'users/:id/password_update' => 'users#password_update'
   resources :users
