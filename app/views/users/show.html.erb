@@ -1,24 +1,30 @@
-<div class='users-show'>
-  <div class='elements'>
+<div class='user-show'>
+  <div class='show-elements'>
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link" href="#!"><%= "#{@user.name}さんの投稿写真一覧" %></a>
+        <%= link_to("#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}") %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#!">いいね！した数</a>
+        <%= link_to("いいね！した数", "/users/#{@user.id}/likes_photos") %>
       </li>
     </ul>
   </div>
 
-  <div class="user-photo" style="width: 18rem;">
-    <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-photo" style="width: 10rem;">
+    <img class="photo-img-top" src="<%= "/photo_images/ICAM0011.JPG" %>" width="200">
     <div class="card-body">
-      <h5 class="card-title"><%= "#{@photo.title}" %></h5>
+      <h5 class="photo-title"><%= "#{@photo.title}" %></h5>
       <!-- ５行目にユーザー名あるので１８行目いらないかもしれません -->
       <a class="photo-user"><%= "#{@user.name}" %></a>
       <div class='photo-rgb'><%= "RGB設定　#{@photo.rgb}" %></div>
-      <div class='photo-tag'><%= "#{tag.name}" %></div>
-      <span class="fa fa-heart">いいねハートアイコン</span>
+      <div class='photo-tag'><%= "#{@tag.name}" %></div>
+      <!-- <i class="fas fa-stroopwafel"></i> -->
+      <div td align="right">
+       <%= fa_icon 'heart' %>
+      </div>
     </div>
   </div>
 </div>
+
+
+

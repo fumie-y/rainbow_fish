@@ -1,16 +1,23 @@
 class UsersController < ApplicationController
+  # indexはURL users/#{@user.id}で表示される
   def index
     @users = User.all
   end
 
+  
   def show
+    # URLでindex画面表示しようとして８行目がおかしいとエラーになる
+    # エラーは　id => indexになっている
     @user = User.find(params[:id])
+    binding.pry
     @photo = Photo.find_by(params[:user_id])
     @tag = Tag.find_by(params[:user_id])
   end
 
   def likes_photos
     @user = User.find(params[:id])
+    @photo = Photo.find_by(params[:user_id])
+    @tag = Tag.find_by(params[:user_id])
   end
 
   def new

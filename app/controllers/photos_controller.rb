@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(
-      image: params[:image],
+      image: "ICAM0011.JPG",
       user_id: @current_user.id
     )
   end
