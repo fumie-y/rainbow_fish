@@ -1,24 +1,43 @@
 class PhotosController < ApplicationController
   def index
+    @photos = Photo.all
+    @user = User.find_by(params[:user_id])
+    @tag = Tag.find_by(params[:user_id])
   end
 
   def show
+    @photo = Photo.find(params[:id])
+    @tag = Tag.find_by(params[:photo_id])
+    @user = User.find(params[:id])
   end
 
   def new
+    @photo = Photo.new
   end
 
   def create
     @photo = Photo.new(
-      image: "ICAM0011.JPG",
-      user_id: @current_user.id
+      title: params[:title],
+      image: "ICAM0006.JPG",
+      photo_comment: params[:photo_comment],
+      rgb: params[:rgb]
     )
+    if @photo.save
+      redirect_to("/photos")
+    else
+      render("photos/new")
+    end
   end
+
+  def edit
+    @photo = Photo.find(params[:id])
+  end
+
 
   def update
   end
 
   def destroy
+    redirect_to("/photos/index")
   end
-  
 end
