@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users
   post 'users/:id/password_update' => 'users#password_update'
   get 'users/:id/likes_photos' => 'users#likes_photos'
+  # destroyは仮の画面作成
   get 'test_destroy' =>  'photos#test_destroy'
 
   resources :photos
