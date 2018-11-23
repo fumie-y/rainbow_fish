@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TopControllerController, type: :controller do
+RSpec.describe TopController, type: :controller do
 
   describe "GET #inquiry" do
     it "returns http success" do

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'inquiry' => 'top_controller#inquiry'
+  get 'inquiry' => 'top#inquiry'
   get 'login' => 'users#login_form'
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'
@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users
   post 'users/:id/password_update' => 'users#password_update'
   get 'users/:id/likes_photos' => 'users#likes_photos'
+  get 'test_destroy' =>  'photos#test_destroy'
 
   resources :photos
   
