@@ -1,0 +1,65 @@
+<div class='photos-index'>
+ <div class='photos-elements'>
+  <h4 class="border-bottom border-dark">投稿写真一覧</h4>
+  <% @photos.each do |photo| %>
+   <div class="card-photo" style="width: 10rem;">
+    <div class='photo-index-item'>
+      <image src="<%= ("/photo_images/#{photo.image}")%> ", width= "200">
+      <%= "#{@user.name}" %>
+      <%= photo.title %>
+      <%= photo.photo_comment%>
+      <%= photo.rgb %>
+      <%= "#{@tag.name}" %>
+      <%= "#{@tag.name}" %>
+      <div td align="right">
+        <%= fa_icon 'heart' %>
+      </div>
+    </div>
+   </div>
+  <% end %>
+ </div>
+</div>
+
+<!-- 下記は検索した後の画面、仮の表示 -->
+<div class='photos-index-search'>
+  <div class="border-bottom border-dark">
+    <div class='photo-seach'>検索結果：花</div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#!" aria-label="Previous">
+            <span aria-hidden="true">«</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#!">1</a></li>
+        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#!" aria-label="Next">
+            <span aria-hidden="true">»</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <% @photos.each do |photo| %>
+   <div class="card-photo" style="width: 10rem;">
+    <div class='photo-index-item'>
+      <image src="<%= ("/photo_images/#{photo.image}")%> ", width= "200">
+      <%= "#{@user.name}" %>
+      <%= photo.title %>
+      <%= photo.photo_comment%>
+      <%= photo.rgb %>
+      <%= "#{@tag.name}" %>
+      <%= "#{@tag.name}" %>
+      <div td align="right">
+        <%= fa_icon 'heart' %>
+      </div>
+    </div>
+   </div>
+  <% end %>
+</div>
+

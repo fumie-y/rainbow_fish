@@ -1,2 +1,16 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class='main users-new_form'>
+  <div class='elements'>
+    <div class='form-heading'>ユーザー新規登録</div>
+    <!-- #TODO: class名は変更の可能性あり -->
+    <div class='users-box'>
+      <%= form_tag("/users/create") do %>
+        <p>ユーザー名</p>
+        <input name='name' value="<%= @name %>">
+        <p>パスワード</p>
+        <input type='password' name='password' value="<%= @password %>">
+        <button type='button' class='btn btn-primary btn-lg'>新規登録</button>
+      <% end %>
+    </div>
+  </div>
+</div>
+

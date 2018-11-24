@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
+  get 'inquiry' => 'top#inquiry'
+  get 'login' => 'users#login_form'
+  post 'login' => 'users#login'
+  post 'logout' => 'users#logout'
+  get 'destroy' =>  'users#destroy_form'
   resources :users
+  post 'users/:id/password_update' => 'users#password_update'
+  get 'users/:id/likes_photos' => 'users#likes_photos'
+  # destroyは仮の画面作成
+  get 'test_destroy' =>  'photos#test_destroy'
+
+  resources :photos
   
   get '/' => 'home#top'
   get 'about' => 'home#about'

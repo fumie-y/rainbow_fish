@@ -1,13 +1,20 @@
 class UsersController < ApplicationController
+  # indexはURL => /usersで表示される
   def index
     @users = User.all
   end
 
+  
   def show
     @user = User.find(params[:id])
+    @photo = Photo.find_by(user_id: @user.id)
+    @tag = Tag.find_by(photo_id: @photo.id)
   end
 
-  def likes_photo
+  def likes_photos
+    @user = User.find(params[:id])
+    @photo = Photo.find_by(user_id: @user.id)
+    @tag = Tag.find_by(photo_id: @photo.id)
   end
 
   def new
@@ -16,7 +23,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(
-      name: params[:name], 
+      name: params[:name],
       password: params[:password],
       profile_image: "default_user.jpg"
     )
@@ -30,21 +37,40 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    
   end
 
   def login_form
   end
 
   def login
+    @user = User.find_by(name: params[:name], password: params[:password])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      flash[:notice] = 'ログインしました'
+      redirect_to('/photos/index')
+    else
+      render('users/login_form')
+    end
   end
 
   def logout
   end
 
-  def destory
+  def password_update
+    @user = User.find(params[:id])
   end
-  
+
+  def destroy_form
+  end
+
+  def destory
+    @user = User.find(params[:id])
+    @user.destroy
+      flash[:notice] = '退会手続きが完了しました'
+  end
 end

@@ -1,0 +1,27 @@
+<div class='users-show'>
+  <div class='elements'>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <%= link_to("#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}") %>
+      </li>
+      <li class="nav-item">
+        <%= link_to("いいね！した数", "/users/#{@user.id}/likes_photos") %>
+      </li>
+    </ul>
+
+    <div class="card-photo" style="width: 10rem;">
+      <img class="photo-img-top" src="<%= "/photo_images/ICAM0001.JPG" %>" width="200">
+      <div class="card-body">
+        <h5 class="photo-title"><%= "#{@photo.title}" %></h5>
+        <!-- ５行目にユーザー名あるので１８行目いらないかもしれません -->
+        <a class="photo-user"><%= "#{@user.name}" %></a>
+        <div class='photo-rgb'><%= "RGB設定　#{@photo.rgb}" %></div>
+        <div class='photo-tag'><%= "#{@tag.name}" %></div>
+        <!-- <i class="fas fa-stroopwafel"></i> -->
+        <div td align="right">
+         <%= fa_icon 'heart' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
