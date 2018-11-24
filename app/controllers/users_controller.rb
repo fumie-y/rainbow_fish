@@ -7,14 +7,14 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @photo = Photo.find_by(params[:user_id])
-    @tag = Tag.find_by(params[:user_id])
+    @photo = Photo.find_by(user_id: @user.id)
+    @tag = Tag.find_by(photo_id: @photo.id)
   end
 
   def likes_photos
     @user = User.find(params[:id])
-    @photo = Photo.find_by(params[:user_id])
-    @tag = Tag.find_by(params[:user_id])
+    @photo = Photo.find_by(user_id: @user.id)
+    @tag = Tag.find_by(photo_id: @photo.id)
   end
 
   def new
