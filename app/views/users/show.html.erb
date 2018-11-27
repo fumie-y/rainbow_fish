@@ -11,9 +11,9 @@
   </div>
   <!-- 後で、photo#indexのviewに合わせるがとりあえず仮のコード -->
   <div class="card-photo" style="width: 10rem;">
-    <img class="photo-img-top" src="<%= "/photo_images/ICAM0011.JPG" %>" width="200">
+    <img class="photo-img-top" src="<%= "/photo_images/ICAM0011.JPG" %>">
     <div class="card-body">
-      <h5 class="photo-title"><%= "#{@photo.title}" %></h5>
+      <h5 class="photo-title"><%= "#{@photo.title}"%></h5>
       <!-- ５行目にユーザー名あるので１８行目いらないかもしれません -->
       <a class="photo-user"><%= "#{@user.name}" %></a>
       <div class='photo-rgb'><%= "RGB設定　#{@photo.rgb}" %></div>

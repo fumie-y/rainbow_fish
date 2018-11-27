@@ -6,12 +6,16 @@
        <div class='post-element'>
         <div class='profile-account'>
           <!-- #TODO: イメージ画像は仮です -->
-          <img src="/images/pathToYourImage.png" class="img-fluid" alt="Responsive image">
-          <h3 class="<%= @user.name %>"></h3>
+          <img src="/user_images/sky.jpg">
+          <h4 class=user-name><"<%= @user.name %>"></h4>
           <div class="btn-group-vertical" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-dark">投稿写真一覧</button>
+            <button type="button" class="btn btn-outline-dark">
+              <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
+            </button>
             <button type="button" class="btn btn-outline-dark">いいね！した数</button>
+            <!-- user.like_photo -->
             <button type="button" class="btn btn-outline-dark">新規投稿</button>
+            <!-- photo.new -->
           </div>
         </div>
        </div>
@@ -40,6 +44,7 @@
         <input type="file" class="form-control-file" id="exampleFormControlFile1">
       </div>
       <button type="button" class="btn btn-primary">更新</button>
+      <!-- user.editへlink -->
     </form>
     <!-- #TODO: パスワード変更 -->
     <form>
