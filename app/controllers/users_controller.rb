@@ -4,11 +4,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  
   def show
     @user = User.find(params[:id])
-    @photo = @user.photos
-    @tag = @photo.tags
+    @photos = @user.photos.pluck(:id)
+    @tag = Tags.where(photo_id: @photos.ids)
   end
 
   def likes_photos
@@ -41,7 +40,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    
   end
 
   def login_form

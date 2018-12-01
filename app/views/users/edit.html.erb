@@ -12,10 +12,12 @@
             <button type="button" class="btn btn-outline-dark">
               <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
             </button>
-            <button type="button" class="btn btn-outline-dark">いいね！した数</button>
-            <!-- user.like_photo -->
-            <button type="button" class="btn btn-outline-dark">新規投稿</button>
-            <!-- photo.new -->
+            <button type="button" class="btn btn-outline-dark">
+              <%= link_to('いいね！した数',"/users/#{@user.id}/likes_photos") %>
+            </button>
+            <button type="button" class="btn btn-outline-dark">
+              <%= link_to('新規投稿',"/photos/new") %>
+            </button>
           </div>
         </div>
        </div>
