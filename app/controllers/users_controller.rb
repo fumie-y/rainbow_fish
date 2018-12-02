@@ -6,14 +6,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @photos = @user.photos.pluck(:id)
-    @tag = Tags.where(photo_id: @photos.ids)
+    @user_posted_photos = @user.photos
   end
 
   def likes_photos
     @user = User.find(params[:id])
-    @photo = @user.photos
-    @tag = @photo.tags
+    @user_posted_photos = @user.photos
+    @photo_tag = @photo.tags
   end
 
   def new
@@ -67,8 +66,8 @@ class UsersController < ApplicationController
   end
 
   def destory
-    @user = User.find(params[:id])
-    @user.destroy
-      flash[:notice] = '退会手続きが完了しました'
+    # @user = User.find(params[:id])
+    # @user.destroy
+    #   flash[:notice] = '退会手続きが完了しました'
   end
 end
