@@ -1,3 +1,46 @@
-<div class='users-destroy'>
-  <%= link_to('TOP画面', "/") %>
+<div class='main users-edit'>
+  <div class='elements'>
+    <div class='form-heading'>アカウント編集</div>
+    <div class='col-md-3 col-sm-4 col-xs-12'>
+      <div class='post-elements'>
+       <div class='post-element'>
+        <div class='profile-account'>
+          <!-- #TODO: イメージ画像は仮です -->
+          <img src="/user_images/sky.jpg">
+          <h4 class=user-name><"<%= @user.name %>"></h4>
+          <div class="btn-group-vertical" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-dark">
+              <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
+            </button>
+            <button type="button" class="btn btn-outline-dark">
+              <%= link_to('いいね！した数',"/users/#{@user.id}/likes_photos") %>
+            </button>
+            <button type="button" class="btn btn-outline-dark">
+              <%= link_to('新規投稿',"/photos/new") %>
+            </button>
+          </div>
+        </div>
+       </div>
+      </div>
+    </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="#!">プロフィール</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#!">パスワード変更</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#!">退会</a>
+      </li>
+    </ul>
+    <!-- ＃TODO: 退会 -->
+    <form>
+      <div class="form-group">
+        <P>退会しますか？</P>
+        <button type="button" class="btn btn-outline-secondary">いいえ</button>
+        <button type="button" class="btn btn-outline-secondary">はい</button>
+      </div>
+    </form>
+  </div>
 </div>

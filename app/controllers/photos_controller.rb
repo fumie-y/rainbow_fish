@@ -1,14 +1,12 @@
 class PhotosController < ApplicationController
   def index
-    @photos = Photo.all
-    @user = User.find(params[:user_id])
-    @tag = Tag.find_by(photo_id: params[:photo_id])
+    @photos = Photo.all.order(create_at: :desc)
   end
 
   def show
     @user = User.find(params[:id])
-    @photo = @user.photos
-    @tag = @photo.tags
+    @user_posted_photos = @user.photos
+    # @photo_tags = @user_posted_photos.tags
   end
 
   def new
@@ -23,7 +21,7 @@ class PhotosController < ApplicationController
       rgb: params[:rgb]
     )
     if @photo.save
-      redirect_to("/photos")
+      redirect_to("/photos/index")
     else
       render("photos/new")
     end
