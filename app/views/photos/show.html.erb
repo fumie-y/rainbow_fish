@@ -1,15 +1,17 @@
 <div class='photos-show'>
   <div class='show-elements'>
-    <img src="<%= "/photo_images/#{@user_posted_photos.image}" %>" width="300">
+    <img src="<%= "/photo_images/#{@photo.image}" %>" width="300">
     <div class='form-group'>
       <p>コメント</p>
-      <div class='photo-comment'><%= "#{@user_posted_photos.photo_comment}" %></div>
+      <div class='photo-comment'><%= "#{@photo.photo_comment}" %></div>
     </div>
     <div class='form-group'>
-      <div class='photo-rgb'><%= "RGB設定　#{@user_posted_photos.rgb}" %></div>
+      <div class='photo-rgb'><%= "RGB設定　#{@photo.rgb}" %></div>
     </div>
     <div class='form-group'>
-      <div class='photo-tag'><%= "#{@photo_tags.name}" %></div>
+      <% @photo_tags.each do |tag| %>
+        <span class="badge badge-info"><%= tag.name %></span>
+      <% end %>
     </div>
     <!-- 自身の投稿の時に編集と削除は表示される -->
     <div class='form-group' td align="right">
