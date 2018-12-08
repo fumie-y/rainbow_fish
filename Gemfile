@@ -45,6 +45,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use rename
 gem 'rename'
 
+#image uploder
 gem 'carrierwave'
 
 group :development, :test do

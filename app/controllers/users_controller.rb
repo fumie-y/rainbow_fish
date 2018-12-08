@@ -65,8 +65,5 @@ class UsersController < ApplicationController
   end
 
   def destory
-    # @user = User.find(params[:id])
-    # @user.destroy
-    #   flash[:notice] = '退会手続きが完了しました'
   end
 end

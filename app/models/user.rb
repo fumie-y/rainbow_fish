@@ -5,8 +5,4 @@ class User < ApplicationRecord
   has_many :photos
   has_many :likes
   has_many :tags, through: :photos
-
-  # def photos
-  #   return Photo.where(user_id: self.id)
-  # end
 end
