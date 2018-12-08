@@ -6,9 +6,8 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id])
-    @tag = Tag.find(params[:id])
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
+    @user_posted_photos = @user.photos
   end
 
   def new
@@ -28,6 +27,11 @@ class PhotosController < ApplicationController
       render("photos/new")
     end
   end
+
+  private
+    def photo_params
+      params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
+    end
 
   def edit
     @photo = Photo.find(params[:id])
