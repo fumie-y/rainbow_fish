@@ -4,17 +4,14 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  
   def show
     @user = User.find(params[:id])
-    @photo = Photo.find_by(user_id: @user.id)
-    @tag = Tag.find_by(photo_id: @photo.id)
+    @user_posted_photos = @user.photos
   end
 
   def likes_photos
     @user = User.find(params[:id])
-    @photo = Photo.find_by(user_id: @user.id)
-    @tag = Tag.find_by(photo_id: @photo.id)
+    @user_posted_photos = @user.photos
   end
 
   def new
@@ -41,7 +38,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    
   end
 
   def login_form
@@ -69,8 +65,5 @@ class UsersController < ApplicationController
   end
 
   def destory
-    @user = User.find(params[:id])
-    @user.destroy
-      flash[:notice] = '退会手続きが完了しました'
   end
 end
