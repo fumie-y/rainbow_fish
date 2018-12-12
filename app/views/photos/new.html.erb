@@ -7,10 +7,10 @@
     <div><P>コメント</P><%= photo.text_area :photo_comment %></div>
     <div><p>RGB設定</p><%= photo.select :rgb_select,{R: 'R', G: 'G', B: 'B', その他: 'その他'} %></div>
     <div>
-      <%= form.label :image %>
+      <p>写真</p>
       <%= form.file_field :image, id: :photo_image %>
     </div>
-    <div><%= photo.submit %></div>
+    <div><%= photo.submit '投稿' %></div>
    <% end %>
 
    

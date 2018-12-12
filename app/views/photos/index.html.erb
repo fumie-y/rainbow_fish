@@ -4,7 +4,7 @@
   <% @photos.each do |photo| %>
    <div class="card-photo" style="width: 10rem;">
     <div class='photo-index-item'>
-      <%= image_tag photo.image.to_s %>
+      <%= image_tag photo.image.url %>
       <!-- <image src="<%#= ("/photo_images/#{photo.image}")%> ", width= "200"> -->
       <%#= "#{@user.name}" %>
       <%= photo.title %>
