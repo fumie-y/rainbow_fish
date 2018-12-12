@@ -9,6 +9,19 @@
       </li>
     </ul>
   </div>
+<<<<<<< Updated upstream
+=======
+  <% @user_posted_photos.each do |photo| %>
+    <%= photo.title %>
+    <%= photo.rgb %>
+    <br>
+      <% photo.tags.each do |tag| %>
+        <%= tag.name %>
+      <% end %>
+    <P>いいね!ボタン（仮）</P>
+  <% end %>
+
+>>>>>>> Stashed changes
   <!-- 後で、photo#indexのviewに合わせるがとりあえず仮のコード -->
   <div class="card-photo" style="width: 10rem;">
     <img class="photo-img-top" src="<%= "/photo_images/ICAM0011.JPG" %>" width="200">
