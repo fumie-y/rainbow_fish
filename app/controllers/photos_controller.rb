@@ -15,11 +15,13 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(
-      title: params[:title],
-      image: "ICAM0006.JPG",
-      photo_comment: params[:photo_comment],
-      rgb: params[:rgb]
+      title: 'sample',
+      image: params[:photo][:image],
+      photo_comment: 'コメント',
+      rgb: 'g',
+      user_id: 1
     )
+
     if @photo.save
       redirect_to("/photos/index")
     else
