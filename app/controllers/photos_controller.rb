@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   def index
-    @photos = Photo.all.order(create_at: :desc)
+    @photos = Photo.all.order(created_at: :desc)
   end
 
   def show
@@ -15,13 +15,14 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(
-      title: params[:title],
+      title: params[:photo][:title],
       image: "ICAM0006.JPG",
-      photo_comment: params[:photo_comment],
-      rgb: params[:rgb]
+      photo_comment: params[:photo][:photo_comment],
+      rgb: 'R',
+      user_id: '1'
     )
     if @photo.save
-      redirect_to("/photos/index")
+      redirect_to("/photos")
     else
       render("photos/new")
     end

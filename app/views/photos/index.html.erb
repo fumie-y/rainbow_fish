@@ -4,13 +4,14 @@
   <% @photos.each do |photo| %>
    <div class="card-photo" style="width: 10rem;">
     <div class='photo-index-item'>
-      <image src="<%= ("/photo_images/#{photo.image}")%> ", width= "200">
-      <%= "#{@user.name}" %>
+      <%= image_tag photo.image.to_s %>
+      <!-- <image src="<%#= ("/photo_images/#{photo.image}")%> ", width= "200"> -->
+      <%#= "#{@user.name}" %>
       <%= photo.title %>
       <%= photo.photo_comment%>
       <%= photo.rgb %>
-      <%= "#{@tag.name}" %>
-      <%= "#{@tag.name}" %>
+      <%#= "#{@tag.name}" %>
+      <%#= "#{@tag.name}" %>
       <div td align="right">
         <%= fa_icon 'heart' %>
       </div>
@@ -20,7 +21,7 @@
  </div>
 </div>
 
-<!-- 下記は検索した後の画面、仮の表示 -->
+<!-- 下記は検索バー、仮の表示 -->
 <div class='photos-index-search'>
   <div class="border-bottom border-dark">
     <div class='photo-seach'>検索結果：花</div>
@@ -45,21 +46,21 @@
     </nav>
   </div>
 
-  <% @photos.each do |photo| %>
+  <%# @photos.each do |photo| %>
    <div class="card-photo" style="width: 10rem;">
     <div class='photo-index-item'>
-      <image src="<%= ("/photo_images/#{photo.image}")%> ", width= "200">
-      <%= "#{@user.name}" %>
-      <%= photo.title %>
-      <%= photo.photo_comment%>
-      <%= photo.rgb %>
-      <%= "#{@tag.name}" %>
-      <%= "#{@tag.name}" %>
+      <image src="<%#= ("/photo_images/#{photo.image}")%> ", width= "200">
+      <%#= "#{@user.name}" %>
+      <%#= photo.title %>
+      <%#= photo.photo_comment%>
+      <%#= photo.rgb %>
+      <%#= "#{@tag.name}" %>
+      <%#= "#{@tag.name}" %>
       <div td align="right">
-        <%= fa_icon 'heart' %>
+        <%#= fa_icon 'heart' %>
       </div>
     </div>
    </div>
-  <% end %>
+  <%#end %>
 </div>
 
