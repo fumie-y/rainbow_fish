@@ -1,7 +1,7 @@
 <div class='photos-index'>
  <div class='photos-elements'>
   <h4 class="border-bottom border-dark">投稿写真一覧</h4>
-  <%# @photos.each do |photo| %>
+  <% @photos.each do |photo| %>
    <!-- <div class="card-photo" style="width: 10rem;"> -->
     <div class='photo-index-item'>
       <%= image_tag photo.image.url %>
@@ -12,12 +12,11 @@
       <%#= photo.rgb %>
       <%#= "#{@tag.name}" %>
       <%#= "#{@tag.name}" %>
-      <div td align="right">
+      <!-- <div td align="right"> -->
         <%#= fa_icon 'heart' %>
-      </div>
+      <!-- </div> -->
     </div>
-   </div>
-  <%# end %>
+  <% end %>
  </div>
 </div>
 
