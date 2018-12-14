@@ -5,11 +5,13 @@
    <%= form_for @photo do |p| %>
     <div class='form-group'>
       <%= p.label :name, 'タイトル' %>
-      <%= p.text_field :title, class: 'form-control' %>
+      <br>
+      <%= p.text_field :title %>
     </div>
     <div class='form-group'>
       <%= p.label :name, 'コメント' %>
-      <%= p.text_area :photo_comment, class: 'form-control' %>
+      <br>
+      <%= p.text_area :photo_comment %>
     </div>
     <div class='form-group'>
       <%= p.label :name, 'RGB設定' %>
@@ -25,7 +27,7 @@
       <%= p.label :name, 'タグ（仮）' %>
       <%= p.text_field :title, class: 'form-control' %>
     </div>
-    <%= p.submit %>
+    <%= p.submit "投稿する" %>
    <% end %>
   </div>
 </div>
