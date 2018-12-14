@@ -2,41 +2,30 @@
 <div class='Photos-new'>
   <h4 class="border-bottom border-dark">新規投稿</h4>
   <div class='new-elements'>
-   <%= form_for @photo do |p| %>
-    <div><P>タイトル</P><%#= photo.text_field :title %></div>
-    <div><P>コメント</P><%#= photo.text_area :photo_comment %></div>
-    <!-- <div><p>RGB設定</p><%#= photo.select :rgb_select,{R: 'R', G: 'G', B: 'B', その他: 'その他'} %></div> -->
-    <div class= 'form-group'>
-      <p>写真</p>
-      <%= p.file_field :image %>
-    </div>
-    <%= p.submit %>
-   <% end %>
-
-    <!-- <div class='form-group'>
-      <select name= 'rgb-select'>
-        <option value='R'>R</option>
-        <option value='G'>G</option>
-        <option value='B'>B</option>
-        <option value='その他'>その他</option>
-      </select> -->
-    <!-- 下記コードドロップダウン選択できない -->
-      <!-- <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <button type="button" class="dropdown-item" type="button">R</button>
-          <a class="dropdown-item" href="#!">G</a>
-          <a class="dropdown-item" href="#!">B</a>
-          <a class="dropdown-item" href="#!">その他</a>
-        </div>
-      </div>
+   <%= form_for @photo do |photo| %>
+    <div class='form-group'>
+      <%#= p.label :name, 'タイトル' %>
+      <%#= p.text_field :title, class: 'form-control' %>
     </div>
     <div class='form-group'>
-      <!-- タグは仮 -->
-      <P>タグ</P>
-      <input class='form-control' name='tag_text' type='text' value='テスト'>
+      <%#= p.label :name, 'コメント' %>
+      <%#= p.text_area :photo_comment, class: 'form-control' %>
     </div>
+    <div class='form-group'>
+      <%#= p.label :name, 'RGB設定' %>
+      <br>
+      <%#= p.select :rgb,[['R', 'R'], ['G', 'G'], ['B', 'B'], ['その他', 'その他']] %>
+    </div>
+    <div class='form-group'>
+      <p>写真</p>
+      <br>
+      <%= photo.file_field :image %>
+    </div>
+    <div class='form-group'>
+      <%#= p.label :name, 'タグ（仮）' %>
+      <%#= p.text_field :title, class: 'form-control' %>
+    </div>
+    <%= photo.submit %>
+   <% end %>
   </div>
 </div>

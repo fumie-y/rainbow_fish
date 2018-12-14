@@ -1,20 +1,19 @@
 <div class='photos-index'>
  <div class='photos-elements'>
   <h4 class="border-bottom border-dark">投稿写真一覧</h4>
+  <!-- "width: 10rem;"は仮。後でSCSSで再設定する -->
   <% @photos.each do |photo| %>
    <!-- <div class="card-photo" style="width: 10rem;"> -->
     <div class='photo-index-item'>
       <%= image_tag photo.image.url %>
-      <!-- <image src="<%#= ("/photo_images/#{photo.image}")%> ", width= "200"> -->
-      <%#= "#{@user.name}" %>
-      <%#= photo.title %>
-      <%#= photo.photo_comment%>
-      <%#= photo.rgb %>
-      <%#= "#{@tag.name}" %>
-      <%#= "#{@tag.name}" %>
-      <!-- <div td align="right"> -->
+      <%#= p.user.name %>
+      <%#= p.title %>
+      <%#= p.photo_comment%>
+      <%#= p.rgb %>
+      <%#= photo.tags.name %>
+      <div td align="right">
         <%#= fa_icon 'heart' %>
-      <!-- </div> -->
+      </div>
     </div>
   <% end %>
  </div>
@@ -44,22 +43,5 @@
       </ul>
     </nav>
   </div>
-
-  <%# @photos.each do |photo| %>
-   <div class="card-photo" style="width: 10rem;">
-    <div class='photo-index-item'>
-      <image src="<%#= ("/photo_images/#{photo.image}")%> ", width= "200">
-      <%#= "#{@user.name}" %>
-      <%#= photo.title %>
-      <%#= photo.photo_comment%>
-      <%#= photo.rgb %>
-      <%#= "#{@tag.name}" %>
-      <%#= "#{@tag.name}" %>
-      <div td align="right">
-        <%#= fa_icon 'heart' %>
-      </div>
-    </div>
-   </div>
-  <%#end %>
 </div>
 
