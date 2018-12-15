@@ -2,13 +2,13 @@
   <div class='elements'>
     <div class='form-heading'>ユーザーログイン</div>
     <!-- #TODO: class名は変更の可能性あり -->
-    <div class='users-box'>
+    <div class='users-login-box'>
       <%= form_tag("/login") do %>
-        <p>ユーザーログイン</p>
-        <input name='name' value="<%= @name %>">
-        <p>パスワード</p>
-        <input type='password' name='password' value="<%= @password %>">
-        <button type='button' class='btn btn-primary btn-lg'>ログイン</button>
+        <P>ユーザー名</P>
+        <input name ="name">
+        <P>パスワード</P>
+        <input type="password" name ="password">
+        <input type="submit" value="ログイン">
       <% end %>
     </div>
   </div>
