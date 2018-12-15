@@ -1,26 +1,25 @@
 <div class='photos-index'>
  <div class='photos-elements'>
   <h4 class="border-bottom border-dark">投稿写真一覧</h4>
-  <% @photos.each do |photo| %>
-   <div class="card-photo" style="width: 10rem;">
+  <!-- "width: 10rem;"は仮。後でSCSSで再設定する -->
+  <% @photos.each do |p| %>
+   <!-- <div class="card-photo" style="width: 10rem;"> -->
     <div class='photo-index-item'>
-      <image src="<%= ("/photo_images/#{photo.image}")%> ", width= "200">
-      <%= "#{@user.name}" %>
-      <%= photo.title %>
-      <%= photo.photo_comment%>
-      <%= photo.rgb %>
-      <%= "#{@tag.name}" %>
-      <%= "#{@tag.name}" %>
+      <%= image_tag p.image.url %>
+      <%= p.user.name %>
+      <%= p.title %>
+      <%= p.photo_comment%>
+      <%= p.rgb %>
+      <%= p.tags.name %>
       <div td align="right">
         <%= fa_icon 'heart' %>
       </div>
     </div>
-   </div>
   <% end %>
  </div>
 </div>
 
-<!-- 下記は検索した後の画面、仮の表示 -->
+<!-- 下記は検索バー、仮の表示 -->
 <div class='photos-index-search'>
   <div class="border-bottom border-dark">
     <div class='photo-seach'>検索結果：花</div>
@@ -44,22 +43,5 @@
       </ul>
     </nav>
   </div>
-
-  <% @photos.each do |photo| %>
-   <div class="card-photo" style="width: 10rem;">
-    <div class='photo-index-item'>
-      <image src="<%= ("/photo_images/#{photo.image}")%> ", width= "200">
-      <%= "#{@user.name}" %>
-      <%= photo.title %>
-      <%= photo.photo_comment%>
-      <%= photo.rgb %>
-      <%= "#{@tag.name}" %>
-      <%= "#{@tag.name}" %>
-      <div td align="right">
-        <%= fa_icon 'heart' %>
-      </div>
-    </div>
-   </div>
-  <% end %>
 </div>
 

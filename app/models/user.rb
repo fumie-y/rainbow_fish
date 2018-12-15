@@ -4,5 +4,4 @@ class User < ApplicationRecord
 
   has_many :photos
   has_many :likes
-  has_many :tags, through: :photos
 end

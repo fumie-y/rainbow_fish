@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   def index
-    @photos = Photo.all.order(create_at: :desc)
+    @photos = Photo.all.order(created_at: :desc)
   end
 
   def show
@@ -14,14 +14,24 @@ class PhotosController < ApplicationController
   end
 
   def create
-    @photo = Photo.new(
-      title: params[:title],
-      image: "ICAM0006.JPG",
-      photo_comment: params[:photo_comment],
-      rgb: params[:rgb]
+     @photo = Photo.new(
+      title: params[:photo][:title],
+      image: params[:photo][:image],
+      photo_comment: params[:photo][:photo_comment],
+      rgb: params[:photo][:rgb],
+      user_id: 1
     )
-    if @photo.save
-      redirect_to("/photos/index")
+     # ToDo:時間があったらロールバック処理を追加、データ移行
+     if @photo.save
+      @tag = Tag.new(
+        name: params[:photo][:tag],
+        photo_id: @photo.id
+        )
+        if @tag.save
+          redirect_to("/photos")
+        else
+          render("photos/new")
+        end
     else
       render("photos/new")
     end
