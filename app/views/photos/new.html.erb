@@ -2,7 +2,7 @@
 <div class='Photos-new'>
   <h4 class="border-bottom border-dark">新規投稿</h4>
   <div class='new-elements'>
-   <%= form_for @photo do |p| %>
+   <%= form_with model: @photo, local: true do |p| %>
     <div class='form-group'>
       <%= p.label :name, 'タイトル' %>
       <br>
@@ -25,7 +25,7 @@
     </div>
     <div class='form-group'>
       <%= p.label :name, 'タグ（仮）' %>
-      <%= p.text_field :title, class: 'form-control' %>
+      <%= p.text_field :tag, class: 'form-control' %>
     </div>
     <%= p.submit "投稿する" %>
    <% end %>
