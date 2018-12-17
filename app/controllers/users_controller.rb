@@ -50,18 +50,20 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(
-      name: params[:user][:name],
-      password: params[:user][:password])
-    if @user
+    @user = User.find_by(name: params[:user][:name])
+    if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       flash[:notice] = 'ログインしました'
-      # 下記はエラーになるがブランチ：photo_newで訂正してる
+      #本来の遷移先は"/photos"だがエラーになってしまうため
+      #仮のリダイレクト先として、"/users"を指定している
+      #エラーはphoto_newブランチで訂正してるので
+      #loginブランチをマージ後はエラーは解消出来るはずです
+
       #redirect_to("/photos")
-      #下記コードは仮のリダイレクト先、上記コード適用の後削除する
+      #下記コードはloginマージ後に削除する
       redirect_to("/users")
     else
-      @error_message = "ユーザー名またはパスワードが間違っています"
+      @error_message = "再度どちらも入力して下さい"
       #TODO: 初期値の表示をするかどうかは後で決める
       # @name = params[:name]
       # @password = params[:password]
