@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+ # アクセス制限（編集後表示する）
+ # before_action :authenticate_user, {only: [:edit, :update]}
+
+ # ログインユーザーがアクセス禁止（編集後表示する）
+ # before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+
   # indexはURL => /usersで表示される
   def index
     @users = User.all
@@ -44,18 +50,29 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(name: params[:name], password: params[:password])
-    if @user #&& @user.authenticate(params[:password])
-      #session[:user_id] = @user.id
+    @user = User.find_by(
+      name: params[:user][:name],
+      password: params[:user][:password])
+    if @user
+      session[:user_id] = @user.id
       flash[:notice] = 'ログインしました'
-      redirect_to('/photos')
+      # 下記はエラーになるがブランチ：photo_newで訂正してる
+      #redirect_to("/photos")
+      #下記コードは仮のリダイレクト先、上記コード適用の後削除する
+      redirect_to("/users")
     else
-      @error_message = "ユーザー名とパスワードを入力して下さい"
-      render('users/login_form')
+      @error_message = "ユーザー名またはパスワードが間違っています"
+      #TODO: 初期値の表示をするかどうかは後で決める
+      # @name = params[:name]
+      # @password = params[:password]
+      render("users/login_form")
     end
   end
 
   def logout
+    session[:user_id] = nil
+    flash[:notice] = 'ログアウトしました'
+    redirect_to("/login")
   end
 
   def password_update
