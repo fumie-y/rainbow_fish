@@ -3,6 +3,7 @@
   <h4 class="border-bottom border-dark">投稿写真一覧</h4>
   <!-- "width: 10rem;"は仮。後でSCSSで再設定する -->
   <% @photos.each do |p| %>
+  <%# binding.pry %>
    <!-- <div class="card-photo" style="width: 10rem;"> -->
     <div class='photo-index-item'>
       <%= image_tag p.image.url %>
@@ -16,7 +17,7 @@
       </div>
     </div>
   <% end %>
- </div>
+ </di3v>
 </div>
 
 <!-- 下記は検索バー、仮の表示 -->
