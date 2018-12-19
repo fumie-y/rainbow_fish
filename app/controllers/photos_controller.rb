@@ -22,7 +22,7 @@ class PhotosController < ApplicationController
       user_id: 1
     )
      # ToDo:時間があったらロールバック処理を追加、データ移行
-     if @photo.save
+    if @photo.save!
       @tag = Tag.new(
         name: params[:photo][:tag],
         photo_id: @photo.id
