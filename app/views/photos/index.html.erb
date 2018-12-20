@@ -1,23 +1,31 @@
 <div class='photos-index'>
  <div class='photos-elements'>
   <h4 class="border-bottom border-dark">投稿写真一覧</h4>
-  <!-- "width: 10rem;"は仮。後でSCSSで再設定する -->
+  <!-- TODO: 画像表示は仮。後でSCSSで再設定する -->
   <% @photos.each do |p| %>
-  <%# binding.pry %>
-   <!-- <div class="card-photo" style="width: 10rem;"> -->
-    <div class='photo-index-item'>
-      <%= image_tag p.image.url %>
-      <%= p.user.name %>
-      <%= p.title %>
-      <%= p.photo_comment%>
-      <%= p.rgb %>
-      <%= p.tags.name %>
-      <div td align="right">
-        <%= fa_icon 'heart' %>
+      <div class="col-md-5 col-md-3">
+        <div class="card">
+          <div class='photo-index-item'>
+            <%= image_tag p.image.url, :size => "200x200" %>
+            <br>
+            <%= p.user.name %>
+            <br>
+            <%= p.title %>
+            <br>
+            <%= p.photo_comment%>
+            <br>
+            <%= p.rgb %>
+            <br>
+            <%= p.tags.name %>
+            <br>
+            <div td align="right">
+              <%= fa_icon 'heart' %>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
   <% end %>
- </di3v>
+ </div>
 </div>
 
 <!-- 下記は検索バー、仮の表示 -->
