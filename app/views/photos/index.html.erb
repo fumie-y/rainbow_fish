@@ -1,31 +1,27 @@
 <div class='photos-index'>
- <div class='photos-elements'>
-  <h4 class="border-bottom border-dark">投稿写真一覧</h4>
+  <div class='photos-elements'>
+    <h4 class="border-bottom border-dark">投稿写真一覧</h4>
   <!-- TODO: 画像表示は仮。後でSCSSで再設定する -->
-  <% @photos.each do |p| %>
-      <div class="col-md-5 col-md-3">
+    <div class="card-deck">
+      <% @photos.each do |p| %>
+      <div class="card-deck">
         <div class="card">
-          <div class='photo-index-item'>
-            <%= image_tag p.image.url, :size => "100x100" %>
-            <br>
-            <%= p.user.name %>
-            <br>
-            <%= p.title %>
-            <br>
-            <%= p.photo_comment%>
-            <br>
-            <%= p.rgb %>
-            <br>
-            <%= p.tags.name %>
-            <br>
-            <div td align="right">
-              <%= fa_icon 'heart' %>
-            </div>
+          <%= image_tag p.image.url %>
+          <div class="card-body">
+              <h4 class="card-title"><%= p.title %></h4>
+              <p class="card-text"><%= p.user.name %></p>
+              <p class="card-text"><%= p.photo_comment%></p>
+              <p class="card-text"><%= p.rgb %></p>
+              <p class="card-text"><%= p.tags.name %></p>
+              <div td align="right">
+                <%= fa_icon 'heart' %>
+              </div>
           </div>
         </div>
       </div>
-  <% end %>
- </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <!-- 下記は検索バー、仮の表示 -->
