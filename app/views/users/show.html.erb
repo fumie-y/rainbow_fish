@@ -8,14 +8,25 @@
         <%= link_to "いいね！した数", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
       </li>
     </ul>
+    <% @user_posted_photos.each do |p| %>
+      <div class='card-deck'>
+        <div class='card'>
+          <%= image_tag p.image.url %>
+          <h4 class='card-title'><%= p.title %></h4>
+          <P class='card-text'><%= p.user.name %></P>
+          <P class='card-text'><%= p.photo_comment %></P>
+          <P class='card-text'><%= p.rgb %></P>
+            <% p.tags.each do |tag| %>
+              <P class='card-text'><%= tag.name %></P>
+            <% end %>
+          <div td align="right">
+            <%= fa_icon 'heart' %>
+          </div>
+      </div>
+    <% end %>
   </div>
-  <% @user_posted_photos.each do |photo| %>
-    <%= photo.title %>
-    <br>
-      <% photo.tags.each do |tag| %>
-        <%= tag.name %>
-      <% end %>
-  <% end %>
+
+
 
   <!-- 後で、photo#indexのviewに合わせるがとりあえず仮のコード -->
   <div class="card-photo" style="width: 10rem;">
