@@ -14,11 +14,10 @@ class NewPhotoImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-#TODO: photosが新規投稿のみ画像の大きさが適用される
-#過去に投稿した分は画像サイズは適用されない
+#画像の上限はcameratalkのサイトを参考にしました
 
   # 画像の上限を設定する
-  process :resize_to_limit => [318, 180]
+  process :resize_to_limit => [640, 400]
 
   # 保存形式をJPGにする
   process :convert => 'jpg'
@@ -27,14 +26,6 @@ class NewPhotoImageUploader < CarrierWave::Uploader::Base
   version :thumb do
     process :resize_to_limit => [318, 180]
   end
-
-  version :thumb100 do
-    process :resize_to_limit => [100, 100]
-  end
-
-  # version :thumb30 do
-  #   process :resize_to_limit => [30, 30]
-  # end
 
   # jpg,jpeg,gif,pngしか受け付けない
   def extension_white_list

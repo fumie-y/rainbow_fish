@@ -6,7 +6,7 @@
       <% @photos.each do |p| %>
       <div class="card-deck">
         <div class="card">
-          <%= image_tag p.image.url %>
+          <%= image_tag p.image.thumb.url %>
           <div class="card-body">
               <h4 class="card-title"><%= p.title %></h4>
               <p class="card-text"><%= p.user.name %></p>
