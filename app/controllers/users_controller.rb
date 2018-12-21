@@ -50,6 +50,7 @@ class UsersController < ApplicationController
   end
 
   def login
+
     @user = User.find_by(name: params[:user][:name])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
@@ -68,6 +69,7 @@ class UsersController < ApplicationController
       # @name = params[:name]
       # @password = params[:password]
       render("users/login_form")
+
     end
   end
 
