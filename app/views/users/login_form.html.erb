@@ -1,15 +1,30 @@
 <div class='main users-login_form'>
-  <div class='elements'>
-    <div class='form-heading'>ユーザーログイン</div>
-    <!-- #TODO: class名は変更の可能性あり -->
-    <div class='users-box'>
-      <%= form_tag("/login") do %>
-        <p>ユーザーログイン</p>
-        <input name='name' value="<%= @name %>">
-        <p>パスワード</p>
-        <input type='password' name='password' value="<%= @password %>">
-        <button type='button' class='btn btn-primary btn-lg'>ログイン</button>
+  <div class='user-login-elements'>
+    <h3 class='border-bottom'>ユーザーログイン</h3>
+    <div class='users-login-box'>
+      <% if @error_message %>
+          <div class='form_error'>
+            <%= @error_message %>
+          </div>
       <% end %>
+      <%= form_for(:user, url: login_path) do |f| %>
+        <%= f.label 'ユーザー名' %>
+        <%= f.text_field :name, class: "form-control" %>
+        <%= f.label 'パスワード' %>
+        <%= f.password_field :password, class: "form-control" %>
+        <br>
+        <%= f.submit 'ログイン', class: "btn btn-primary" %>
+      <% end %>
+
+      <!-- 編集後まで一応残しておく
+      <%#= form_tag("/login") do %>
+        <p>ユーザー名</p>
+        <input name='name' class="form-control">
+        <P>パスワード</P>
+        <input type='passoword' name='password' class="form-control">
+        <br>
+        <input type="submit" value='ログイン' class="btn btn-primary btn-lg">
+      <%# end %> -->
     </div>
   </div>
 </div>

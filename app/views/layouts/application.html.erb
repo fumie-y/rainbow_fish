@@ -14,7 +14,20 @@
       <div class='header-logo'>
         <%= link_to('レインボーフィッシュ', '/about') %>
       </div>
+      <!-- TODO: listの中点をSCSSで消す -->
       <ul class='header-list'>
+        <!-- ログイン中のユーザーを表示する -->
+        <% if @current_user %>
+          <li><%= link_to(@current_user.name, "/users/#{@current_user.id}") %></li>
+          <li>キーワード</li>
+          <li>RGB</li>
+          <li>検索</li>
+          <li><%= link_to('ログアウト', "/logout",{method: :post}) %></li>
+        <!-- ログアウトで表示されるヘッダー  -->
+        <% else %>
+          <li><%= link_to('新規登録', "/users/new") %></li>
+          <li><%= link_to('ログイン', "/login") %></li>
+        <% end %>
       </ul>
     </header>
     <div class='container'>
