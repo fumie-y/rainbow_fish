@@ -7,7 +7,13 @@ class UsersController < ApplicationController
 
   # indexはURL => /usersで表示される
   def index
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
     @users = User.all
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
   end
 
   def show
