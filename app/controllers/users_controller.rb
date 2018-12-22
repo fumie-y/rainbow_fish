@@ -8,6 +8,9 @@ class UsersController < ApplicationController
   # indexはURL => /usersで表示される
   def index
     @users = User.all
+    p 'ああああああああああテスト'
+    p 'ああああああああああテスト'
+    p 'ああああああああああテスト'
   end
 
   def show
