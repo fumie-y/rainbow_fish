@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  # ページ編集後に表示する
+  # TODO: 下記コードは恐らくphoto_new2がマージされていないためエラーになる
   # before_action :forbid_login_user, {only: [:top]}
 
   def top

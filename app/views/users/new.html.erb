@@ -1,12 +1,11 @@
 <div class='main users-new_form'>
   <div class='user-new-elements'>
     <h3 class='border-bottom'>ユーザー新規登録</h3>
+    <!-- TODO: error.messageは下記コードだと反映しない -->
+    <% @user.errors.full_messages.each do |message| %>
+        <%= message %>
+    <% end %>
     <div class='users-login-box'>
-      <% if @error_message %>
-          <div class='form_error'>
-            <%= @error_message %>
-          </div>
-      <% end %>
       <%= form_for(:user, url: users_path) do |f| %>
         <%= f.label 'ユーザー名' %>
         <%= f.text_field :name, class: "form-control" %>

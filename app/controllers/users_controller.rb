@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
- # アクセス制限（編集後表示する）
- # before_action :authenticate_user, {only: [:edit, :update]}
-
- # ログインユーザーがアクセス禁止（編集後表示する）
- # before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
-
+  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+  # TODO: 下記コードは恐らくphoto_new2がマージされていないためエラーになる
+  #before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+  before_action :ensure_correct_user, {only: [:edit, :update]}
   # indexはURL => /usersで表示される
   def index
     @users = User.all
@@ -91,4 +89,12 @@ class UsersController < ApplicationController
 
   def destory
   end
+
+  # TODO: エラーになる（photo_new2マージ後もう一度試す）
+  # def ensure_correct_user
+  #   if params[:id].to_i != @current_user.id
+  #     flash[:notice] = '権限がありません'
+  #     redirect_to("/photos")
+  #   end
+  # end
 end
