@@ -19,7 +19,10 @@ class PhotosController < ApplicationController
       image: params[:photo][:image],
       photo_comment: params[:photo][:photo_comment],
       rgb: params[:photo][:rgb],
-      user_id: 1
+      # TODO: @current_userはapplication_controller.rbで定義してる
+      # loginマージ後再度下記コードを試す
+      # user_id: @current_user.id
+      user_id: 2
     )
      # ToDo:時間があったらロールバック処理を追加、データ移行
     if @photo.save!

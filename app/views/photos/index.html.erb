@@ -2,23 +2,27 @@
   <div class='photos-elements'>
     <h4 class="border-bottom border-dark">投稿写真一覧</h4>
   <!-- TODO: 画像表示は仮。後でSCSSで再設定する -->
+  <!-- card-deckはeachの上下に入力してないと写真一覧の形として表示されない -->
+  <!-- 可能であれば、後で検証する -->
     <div class="card-deck">
-      <% @photos.each do |p| %>
-      <div class="card-deck">
-        <div class="card">
-          <%= image_tag p.image.thumb.url %>
-          <div class="card-body">
-              <h4 class="card-title"><%= p.title %></h4>
-              <p class="card-text"><%= p.user.name %></p>
-              <p class="card-text"><%= p.photo_comment%></p>
-              <p class="card-text"><%= p.rgb %></p>
-              <p class="card-text"><%= p.tags.name %></p>
+      <% @photos.each do |photo| %>
+        <div class="card-deck">
+          <div class="card">
+            <%= image_tag photo.image.thumb.url %>
+            <div class="card-body">
+              <h4 class="card-title"><%= photo.title %></h4>
+              <p class="card-text"><%= photo.user.name %></p>
+              <p class="card-text"><%= photo.photo_comment%></p>
+              <p class="card-text"><%= photo.rgb %></p>
+              <% photo.tags.each do |tag| %>
+                <%= tag.name %>
+              <% end %>
               <div td align="right">
                 <%= fa_icon 'heart' %>
               </div>
+            </div>
           </div>
         </div>
-      </div>
       <% end %>
     </div>
   </div>
