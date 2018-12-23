@@ -27,24 +27,15 @@ class UsersController < ApplicationController
       #params.require(:user).permit(:name, :password)
       name: params[:user][:name],
       password: params[:user][:password],
-      # profile_image: "default_user.jpg"
+      profile_image: "default_user.jpg"
     )
-
-    # デフォルト画像の表示の考え方
-    # userがsaveされたら（@user.save）
-    # userのプロフィール画像投稿があるか判断して、もしnilならdefault画像を投稿する。
     if @user.save
-      if @user.profile_image = nil
-        image_tag: "/user_images/default_user.jpg"
-      else
-        # render("/users/new")
-      end
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
-      redirect_to = ("/users")
+      redirect_to("/users")
       # redirect_to  users_path
     else
-      render = ("/users/new")
+      render("/users/new")
     end
   end
 
