@@ -4,7 +4,9 @@
     <div class='users-login-box'>
       <% if @error_message %>
           <div class='form_error'>
+            <div class="alert alert-danger" role="alert">
             <%= @error_message %>
+            </div>
           </div>
       <% end %>
       <%= form_for(:user, url: login_path) do |f| %>

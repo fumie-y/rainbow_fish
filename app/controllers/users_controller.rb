@@ -24,19 +24,25 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(
-      #コメントアウトしたソースコードでも新規登録は出来ました。
-      #しかし、default画像の登録がまだ分かりませんでした。
       #params.require(:user).permit(:name, :password)
       name: params[:user][:name],
       password: params[:user][:password],
-      profile_image: "default_user.jpg"
+      # profile_image: "default_user.jpg"
     )
+
+    # デフォルト画像の表示の考え方
+    # userがsaveされたら（@user.save）
+    # userのプロフィール画像投稿があるか判断して、もしnilならdefault画像を投稿する。
     if @user.save
+      if @user.profile_image = nil
+        image_tag: "/user_images/default_user.jpg"
+      else
+        # render("/users/new")
+      end
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
-      #コメントアウトしたページへは移動しませんでしたので、users_pathにしてます。
-      #redirect_to = ("/users/#{@user.id}")
-      redirect_to  users_path
+      redirect_to = ("/users")
+      # redirect_to  users_path
     else
       render = ("/users/new")
     end
