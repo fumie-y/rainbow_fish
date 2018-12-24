@@ -16,10 +16,10 @@ class ApplicationController < ActionController::Base
 
   # ログインユーザーがアクセスできない
   # TODO: 下記コードは恐らくphoto_new2がマージされていないためエラーになる
-  # def forbid_login_user
-  #   if @current_user
-  #     flash[:notice] = 'ログイン中です'
-  #     redirect_to("/photos")
-  #   end
-  # end
+  def forbid_login_user
+    if @current_user
+      flash[:notice] = 'ログイン中です'
+      redirect_to("/photos")
+    end
+  end
 end

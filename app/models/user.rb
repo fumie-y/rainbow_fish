@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
+  
   validates :name, presence: true, uniqueness: true
   validates :password, presence: true
-  validates :user_id, presence: true
 
 
   has_many :photos #dependent: :destroy(後で表示)
