@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
-  # TODO: 下記コードは恐らくphoto_new2がマージされていないためエラーになる
   before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
   before_action :ensure_correct_user, {only: [:edit, :update]}
 
@@ -29,7 +28,8 @@ class UsersController < ApplicationController
       password: params[:user][:password],
       profile_image: "default_user.jpg"
     )
-    if @user.save!
+    # ！付きはエラー画面になるので外しました。確認後こちらのコメントは削除します。
+    if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
       redirect_to("/users/#{@user.id}")
@@ -80,7 +80,6 @@ class UsersController < ApplicationController
   def destory
   end
 
-  # TODO: エラーになる（photo_new2マージ後もう一度試す）
   def ensure_correct_user
     if params[:id].to_i != @current_user.id
       flash[:notice] = '権限がありません'
