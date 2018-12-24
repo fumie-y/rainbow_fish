@@ -1,7 +1,19 @@
 class UsersController < ApplicationController
+ # アクセス制限（編集後表示する）
+ # before_action :authenticate_user, {only: [:edit, :update]}
+
+ # ログインユーザーがアクセス禁止（編集後表示する）
+ # before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+
   # indexはURL => /usersで表示される
   def index
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
     @users = User.all
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
   end
 
   def show
@@ -44,18 +56,33 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(name: params[:name], password: params[:password])
-    if @user #&& @user.authenticate(params[:password])
-      #session[:user_id] = @user.id
+
+    @user = User.find_by(name: params[:user][:name])
+    if @user && @user.authenticate(params[:user][:password])
+      session[:user_id] = @user.id
       flash[:notice] = 'ログインしました'
-      redirect_to('/photos')
+      #本来の遷移先は"/photos"だがエラーになってしまうため
+      #仮のリダイレクト先として、"/users"を指定している
+      #エラーはphoto_newブランチで訂正してるので
+      #loginブランチをマージ後はエラーは解消出来るはずです
+
+      #redirect_to("/photos")
+      #下記コードはloginマージ後に削除する
+      redirect_to("/users")
     else
-      #@error_message = "ユーザー名とパスワードを入力して下さい"
-      render('users/login_form')
+      @error_message = "再度どちらも入力して下さい"
+      #TODO: 初期値の表示をするかどうかは後で決める
+      # @name = params[:name]
+      # @password = params[:password]
+      render("users/login_form")
+
     end
   end
 
   def logout
+    session[:user_id] = nil
+    flash[:notice] = 'ログアウトしました'
+    redirect_to("/login")
   end
 
   def password_update
