@@ -1,14 +1,18 @@
 <!-- destroy仮の画面です -->
+<!-- 下記TODOはコンフリクトが起きそうなので、login,user_newブランチマージ後に作業する -->
+<!-- TODO: link_toエラー、おそらく下記修正すれば解消される -->
+<!-- TODO: routes.rbでURLを変更する  -->
+<!-- TODO: photos.controllerでdestroyアクションでphoto.id取得、redirect先を"/photos"に変更する -->
 <div class='photos-destroy'>
   <div class="card">
     <div class="card-body">
-      <div class="btn btn-danger btn-lg btn-block">
+      <h2 class="btn btn-danger btn-lg btn-block">
         写真を削除しますか？
-      </div>
+      </h2>
     </div>
     <div class="card-body">
-      <button type="button" class="btn btn-outline-dark btn-lg">はい</button>
-      <button type="button" class="btn btn-outline-dark btn-lg">いいえ</button>
+      <%#= link_to 'はい', {:controller => "photos", action => "destroy"}, {:class => "btn btn-outline-dark btn-lg"} %>
+      <%#= link_to 'いいえ', {:controller => "photos", action => "show"}, {:class => "btn btn-outline-dark btn-lg"} %>
     </div>
   </div>
 </div>
