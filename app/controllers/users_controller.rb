@@ -5,7 +5,13 @@ class UsersController < ApplicationController
   before_action :ensure_correct_user, {only: [:edit, :update]}
   # indexはURL => /usersで表示される
   def index
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
     @users = User.all
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
+    puts 'ああああああああああ'
   end
 
   def show
@@ -50,6 +56,7 @@ class UsersController < ApplicationController
   end
 
   def login
+
     @user = User.find_by(name: params[:user][:name])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
@@ -68,6 +75,7 @@ class UsersController < ApplicationController
       # @name = params[:name]
       # @password = params[:password]
       render("users/login_form")
+
     end
   end
 
