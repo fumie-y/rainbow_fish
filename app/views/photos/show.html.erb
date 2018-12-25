@@ -1,13 +1,14 @@
 <div class='photos-show'>
   <div class='photo-show-elements'>
+    <!-- TODO: cardの大きさは後でSCSSで変更 -->
     <div class="card">
       <!-- TODO: image_tagのサイズを後で変更する -->
-        <%= image_tag "#{@photo.image}", :class => 'card-img-top' %>
-        <div class="card-body">
+      <%= image_tag "#{@photo.image}", :class => 'img-fluid' %>
+      <div class="card-body">
         <h4 class="card-title"><%= @photo.title %></h4>
         <p class="card-text"><%= @photo.photo_comment%></p>
-        <!-- TODO: rgbは文字列のズレ直す -->
-        <p class='card-title'>RGB設定<span class='btn btn-link'><%= @photo.rgb %></span></p>
+        <!-- TODO: rgbは文字列のズレ直す rgbは文字色だけ青にしたいのでlinkはいらない -->
+        <p class='card-title'>RGB設定<span class='btn-link'><%= @photo.rgb %></span></p>
         <div class="card-text">
           <% @photo_tags.each do |tag| %>
             <%= tag.name %>
@@ -20,27 +21,28 @@
       </div>
     </div>
   </div>
-  <!-- TODO: サイズ指定は仮。後でSCSSにて変更する -->
+  <!-- TODO: profile_imageのサイズは仮。後でSCSSにて変更する -->
   <div class='photo-user-box'>
     <div class="card">
       <div class="card-body">
         <p class='pull-left'>
-          <img class='img-thumbnail' src="<%= "/user_images/#{@user.profile_image}" %>" width="100px" height="100px">
+          <%= image_tag "/user_images/#{@user.profile_image}" %>
         </p>
         <p class='text-center'>
-          <%= link_to('@user.name', "/users/#{@user.id}", class: "btn btn-promary") %>
+          <%= link_to("@user.name", "/users/#{@user.id}", class: "btn btn-promary btn-lg") %>
         </p>
       </div>
     </div>
   </div>
-  <!-- TODO: 各写真をクリックでそれぞれのphoto.idに飛ばせたい（時間があればやる） -->
-    <div class='user-photo-index'>
-      <h5>その他の投稿</h5>
+  <br>
+  <div class='user-post-photos'>
+    <h5 class='border-bottom'>その他の投稿</h5>
       <% @user.photos.each do |p| %>
-        <%= image_tag p.image.thumb.url %>
-        <%#= link_to(p.image,"/photos/#{photo.id}") %>
+        <%= link_to("/photos/#{p.id}") do %>
+          <%= image_tag p.image.thumb.url %>
+        <% end %>
       <% end %>
-    </div>
+  </div>
   </div>
 </div>
 
