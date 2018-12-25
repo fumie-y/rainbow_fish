@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+  before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+  before_action :ensure_correct_user, {only: [:edit, :update]}
+
   # indexはURL => /usersで表示される
   def index
     @users = User.all
@@ -20,16 +24,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(
-      name: params[:name],
-      password: params[:password],
+      name: params[:user][:name],
+      password: params[:user][:password],
       profile_image: "default_user.jpg"
     )
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
-      redirect_to = ("/users/#{@user.id}")
+      redirect_to("/users/#{@user.id}")
     else
-      render = ("/users/new")
+      render("/users/new")
     end
   end
 
@@ -44,18 +48,25 @@ class UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(name: params[:name], password: params[:password])
-    if @user #&& @user.authenticate(params[:password])
-      #session[:user_id] = @user.id
+    @user = User.find_by(name: params[:user][:name])
+    if @user && @user.authenticate(params[:user][:password])
+      session[:user_id] = @user.id
       flash[:notice] = 'ログインしました'
-      redirect_to('/photos')
+      redirect_to("/photos")
     else
-      #@error_message = "ユーザー名とパスワードを入力して下さい"
-      render('users/login_form')
+      @error_message = "再度どちらも入力して下さい"
+      #TODO: 初期値の表示をするかどうかは後で決める
+      # @name = params[:name]
+      # @password = params[:password]
+      render("users/login_form")
+
     end
   end
 
   def logout
+    session[:user_id] = nil
+    flash[:notice] = 'ログアウトしました'
+    redirect_to("/login")
   end
 
   def password_update
@@ -66,5 +77,12 @@ class UsersController < ApplicationController
   end
 
   def destory
+  end
+
+  def ensure_correct_user
+    if params[:id].to_i != @current_user.id
+      flash[:notice] = '権限がありません'
+      redirect_to("/photos")
+    end
   end
 end
