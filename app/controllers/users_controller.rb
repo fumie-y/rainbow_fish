@@ -28,7 +28,6 @@ class UsersController < ApplicationController
       password: params[:user][:password],
       profile_image: "default_user.jpg"
     )
-    # ！付きはエラー画面になるので外しました。確認後こちらのコメントは削除します。
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
