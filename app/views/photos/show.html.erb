@@ -2,7 +2,7 @@
   <div class='photo-show-elements'>
     <!-- TODO: cardの大きさは後でSCSSで変更 -->
     <div class="card">
-      <!-- TODO: image_tagのサイズを後で変更する -->
+    <!-- TODO: image_tagのサイズを後で変更する -->
       <%= image_tag "#{@photo.image}", :class => 'img-fluid' %>
       <div class="card-body">
         <h4 class="card-title"><%= @photo.title %></h4>
@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <!-- TODO: profile_imageのサイズは仮。後でSCSSにて変更する -->
+  <!-- TODO: profile_imageアップロード機能実装後、サムネイル表示する（サムネイルまたはそれより小さいサイズ） -->
   <div class='photo-user-box'>
     <div class="card">
       <div class="card-body">
@@ -29,7 +29,7 @@
           <%= image_tag "/user_images/#{@user.profile_image}" %>
         </p>
         <p class='text-center'>
-          <%= link_to("@user.name", "/users/#{@user.id}", class: "btn btn-promary btn-lg") %>
+          <%= link_to(@user.name, "/users/#{@user.id}", class: "btn btn-promary btn-lg") %>
         </p>
       </div>
     </div>
@@ -42,7 +42,6 @@
           <%= image_tag p.image.thumb.url %>
         <% end %>
       <% end %>
-  </div>
   </div>
 </div>
 
