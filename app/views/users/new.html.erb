@@ -1,8 +1,6 @@
 <div class='main users-new_form'>
   <div class='user-new-elements'>
     <h3 class='border-bottom'>ユーザー新規登録</h3>
-    <!-- TODO: error.messageは下記コードだと英語表記になるので,
-    photo_new2マージ後gemfile追加する -->
     <% @user.errors.full_messages.each do |message| %>
       <div class="alert alert-danger" role="alert">
         <%= message %>
