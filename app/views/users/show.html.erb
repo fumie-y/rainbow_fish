@@ -7,38 +7,34 @@
       <li class="nav-item">
         <%= link_to "いいね！した数", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
       </li>
+      <li class="nav-item">
+        <% if @user.id == @current_user.id %>
+          <%= link_to 'アカウント編集', "/users/#{@user.id}/edit", class: "nav-link" %>
+        <% end %>
+      </li>
     </ul>
-    <% @user_posted_photos.each do |p| %>
-      <div class='card-deck'>
-        <div class='card'>
-          <%= image_tag p.image.url %>
-          <h4 class='card-title'><%= p.title %></h4>
-          <P class='card-text'><%= p.user.name %></P>
-          <P class='card-text'><%= p.photo_comment %></P>
-          <P class='card-text'><%= p.rgb %></P>
-            <% p.tags.each do |tag| %>
-              <P class='card-text'><%= tag.name %></P>
+    <!-- TODO: cardサイズはphoto.indexでgem導入済み、マージ後再度試す -->
+    <div class='card-deck'>
+      <% @user_posted_photos.each do |p| %>
+        <div class='card-deck'>
+          <div class='card'>
+            <%= link_to "/photos/#{p.id}" do %>
+              <%= image_tag p.image.thumb.url %>
             <% end %>
-          <div td align="right">
-            <%= fa_icon 'heart' %>
+            <h4 class='card-title'><%= p.title %></h4>
+            <P class='card-text'><%= p.user.name %></P>
+            <P class='card-text'><%= p.photo_comment %></P>
+            <P class='card-text'><%= p.rgb %></P>
+            <!-- TODO: N+1問題 -->
+              <% p.tags.each do |tag| %>
+                <P class='card-text'><%= tag.name %></P>
+              <% end %>
+            <div td align="right">
+              <%= fa_icon 'heart' %>
+            </div>
           </div>
-      </div>
-    <% end %>
-  </div>
-
-
-
-  <!-- 後で、photo#indexのviewに合わせるがとりあえず仮のコード -->
-  <div class="card-photo" style="width: 10rem;">
-    <img class="photo-img-top" src="<%#= "/photo_images/ICAM0011.JPG" %>">
-    <div class="card-body">
-      <h5 class="photo-title"><%#= "#{@user_posted_photos.title}"%></h5>
-      <a class="photo-user"><%#= "#{@user.name}" %></a>
-      <div class='photo-rgb'><%#= "RGB設定　#{@user_posted_photos.rgb}" %></div>
-      <div class='photo-tag'><%#= "#{@photo_tags.name}" %></div>
-      <div td align="right">
-       <%= fa_icon 'heart' %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
