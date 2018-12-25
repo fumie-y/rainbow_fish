@@ -1,23 +1,36 @@
 <div class='photos-index'>
- <div class='photos-elements'>
-  <h4 class="border-bottom border-dark">投稿写真一覧</h4>
-  <!-- "width: 10rem;"は仮。後でSCSSで再設定する -->
-  <% @photos.each do |p| %>
-  <%# binding.pry %>
-   <!-- <div class="card-photo" style="width: 10rem;"> -->
-    <div class='photo-index-item'>
-      <%= image_tag p.image.url %>
-      <%= p.user.name %>
-      <%= p.title %>
-      <%= p.photo_comment%>
-      <%= p.rgb %>
-      <%= p.tags.name %>
-      <div td align="right">
-        <%= fa_icon 'heart' %>
-      </div>
+  <div class='photos-elements'>
+    <h4 class="border-bottom border-dark">投稿写真一覧</h4>
+  <!-- TODO: card-deckはeachの上下に入力してないと写真一覧の形として表示されない -->
+  <!-- 可能であれば、後で検証する -->
+    <div class="card-deck">
+      <% @photos.each do |photo| %>
+        <div class="card-deck">
+          <div class="card">
+            <%= link_to "/photos/#{photo.id}" do %>
+              <%= image_tag photo.image.thumb.url %>
+            <% end %>
+            <div class="card-body">
+              <h4 class="card-title">
+                <%= link_to(photo.title, "/photos/#{photo.id}") %>
+              </h4>
+              <p class="card-text">
+                <%= link_to(photo.user.name, "/users/#{photo.user.id}") %>
+              </p>
+              <p class="card-text"><%= photo.photo_comment%></p>
+              <p class="card-text"><%= photo.rgb %></p>
+              <% photo.tags.each do |tag| %>
+                <%= tag.name %>
+              <% end %>
+              <div td align="right">
+                <%= fa_icon 'heart' %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
- </di3v>
+  </div>
 </div>
 
 <!-- 下記は検索バー、仮の表示 -->

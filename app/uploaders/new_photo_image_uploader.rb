@@ -1,6 +1,7 @@
 class NewPhotoImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
+  # リサイズしたり画像形式を変更するのに必要
+  include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
@@ -11,6 +12,41 @@ class NewPhotoImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+#画像の上限はcameratalkのサイトを参考にしました
+
+  # 画像の上限を設定する
+  process :resize_to_limit => [640, 400]
+
+  # 保存形式をJPGにする
+  process :convert => 'jpg'
+
+  # サムネイルを生成する設定
+  version :thumb do
+    process :resize_to_limit => [318, 180]
+  end
+
+  # jpg,jpeg,gif,pngしか受け付けない
+  def extension_white_list
+    %w(jpg jpeg gif png)
+  end
+
+  # 拡張子が同じでないとGIFをJPGとかにコンバートできないので、ファイル名を変更
+  def filename
+    super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
+  end
+
+ # ファイル名を日付にするとタイミングのせいでサムネイル名がずれる
+ # ファイル名はランダムで一意になる
+  def filename
+    "#{secure_token}.#{file.extension}" if original_filename.present?
+  end
+
+  protected
+  def secure_token
+    var = :"@#{mounted_as}_secure_token"
+    model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
