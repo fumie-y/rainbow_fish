@@ -1,19 +1,11 @@
 class UsersController < ApplicationController
- # アクセス制限（編集後表示する）
- # before_action :authenticate_user, {only: [:edit, :update]}
-
- # ログインユーザーがアクセス禁止（編集後表示する）
- # before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+  before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+  before_action :ensure_correct_user, {only: [:edit, :update]}
 
   # indexはURL => /usersで表示される
   def index
-    puts 'ああああああああああ'
-    puts 'ああああああああああ'
-    puts 'ああああああああああ'
     @users = User.all
-    puts 'ああああああああああ'
-    puts 'ああああああああああ'
-    puts 'ああああああああああ'
   end
 
   def show
@@ -32,16 +24,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(
-      name: params[:name],
-      password: params[:password],
+      name: params[:user][:name],
+      password: params[:user][:password],
       profile_image: "default_user.jpg"
     )
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
-      redirect_to = ("/users/#{@user.id}")
+      redirect_to("/users/#{@user.id}")
     else
-      render = ("/users/new")
+      render("/users/new")
     end
   end
 
@@ -56,19 +48,11 @@ class UsersController < ApplicationController
   end
 
   def login
-
     @user = User.find_by(name: params[:user][:name])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       flash[:notice] = 'ログインしました'
-      #本来の遷移先は"/photos"だがエラーになってしまうため
-      #仮のリダイレクト先として、"/users"を指定している
-      #エラーはphoto_newブランチで訂正してるので
-      #loginブランチをマージ後はエラーは解消出来るはずです
-
-      #redirect_to("/photos")
-      #下記コードはloginマージ後に削除する
-      redirect_to("/users")
+      redirect_to("/photos")
     else
       @error_message = "再度どちらも入力して下さい"
       #TODO: 初期値の表示をするかどうかは後で決める
@@ -93,5 +77,12 @@ class UsersController < ApplicationController
   end
 
   def destory
+  end
+
+  def ensure_correct_user
+    if params[:id].to_i != @current_user.id
+      flash[:notice] = '権限がありません'
+      redirect_to("/photos")
+    end
   end
 end
