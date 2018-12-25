@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, {only: [:new, :create, :edit, :update, :destroy]}
   def index
     @photos = Photo.all.order(created_at: :desc)
   end
@@ -20,10 +20,7 @@ class PhotosController < ApplicationController
       image: params[:photo][:image],
       photo_comment: params[:photo][:photo_comment],
       rgb: params[:photo][:rgb],
-      # TODO: @current_userはapplication_controller.rbで定義してる
-      # loginマージ後再度下記コードを試す
-      # user_id: @current_user.id
-      user_id: 2
+      user_id: @current_user.id
     )
      # ToDo:時間があったらロールバック処理を追加、データ移行
     if @photo.save!
