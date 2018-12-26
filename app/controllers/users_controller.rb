@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def likes_photos
     @user = User.find(params[:id])
     @user_posted_photos = @user.photos
+    @likes = Like.where(user_id: @user.id)
   end
 
   def new

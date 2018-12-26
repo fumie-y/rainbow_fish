@@ -8,6 +8,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @photo_tags = @photo.tags
     @user = @photo.user
+    @likes_count = Like.where(photo_id: @photo.id).count
   end
 
   def new

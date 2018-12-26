@@ -15,9 +15,25 @@
           <% end %>
         </div>
         <div class="border-bottom"></div>
-        <div td align="right">
-          <%= fa_icon 'heart' %>
-        </div>
+        <!-- <div td align="right">
+          <%#= fa_icon 'heart' %>
+        </div> -->
+
+        <!-- TODO: fa_iconのカラー表示が機能しない（カラーは後ほど変更）、下記コードは機能しない -->
+        <% if Like.find_by(user_id: @current_user.id, photo_id: @photo.id) %>
+          <%= link_to("/likes/#{@photo.id}/destroy", {method: "post"}) do %>
+            <%= fa_icon 'heart', class: "fa-red" %>
+            <!-- <span class="fa fa-heart like-btn-unlike"></span> -->
+          <% end %>
+        <% else %>
+          <%= link_to("/likes/#{@photo.id}/create", {method: "post"}) do %>
+            <%= fa_icon 'heart', class: "fa-yellow" %>
+            <!-- <span class="fa fa-heart like-btn-like"></span> -->
+          <% end %>
+        <% end %>
+        <%= @likes_count %>
+
+
       </div>
     </div>
   </div>
