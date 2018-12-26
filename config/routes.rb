@@ -3,11 +3,13 @@ Rails.application.routes.draw do
   get 'login' => 'users#login_form'
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'
-  get 'destroy' =>  'users#destroy_form'
+  get 'users/:id/destroy_form' =>  'users#destroy_form'
+  post 'users/:id/destroy' =>  'users#destroy'
   resources :users
+  #post "users/:id/update" => "users#update"
   post 'users/:id/password_update' => 'users#password_update'
   get 'users/:id/likes_photos' => 'users#likes_photos'
-  get 'users/:id/password' => 'users#password_update'
+  get 'users/:id/password_update' => 'users#password_update'
   # destroyは仮の画面作成
   get 'test_destroy' =>  'photos#test_destroy'
 

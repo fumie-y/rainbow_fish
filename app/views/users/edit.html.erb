@@ -1,4 +1,4 @@
-<div class='main users-edit'>
+<div class='users-edit'>
   <div class='edit-elements'>
     <h4 class='border-bottom'>アカウント編集</h4>
     <!-- TODO: cardの高さを後で揃える -->
@@ -28,7 +28,6 @@
                 </div>
                 </div>
               </div>
-              <!-- 下記のコードだとまだuser指定が出来てません -->
               <div class="col-lg-9">
               <div class="card img-thumbnail">
                   <div class="card-title">
@@ -37,26 +36,26 @@
                         <%= link_to 'プロフィール', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
                       </li>
                       <li class="nav-item">
-                        <%= link_to 'パスワード変更', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
+                        <%= link_to 'パスワード変更', {:controller => "users", :action => "password_update"}, {:class => "nav-link"} %>
                       </li>
                       <li class="nav-item">
-                        <%= link_to '退会', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
+                        <%= link_to '退会', {:controller => "users", :action => "destroy_form"}, {:class => "nav-link"} %>
                       </li>
                     </ul>
                   </div>
                   <div class="card-text">
-                    <%= form_for(@user) do |u| %>
+                    <%= form_for @user do |u| %>
                       <div class="form-group">
                         <%= u.label :name, 'ユーザー名' %>
                         <br>
                         <%= u.text_field :name, class: 'form-control' %>
                       </div>
                       <div class="form-group">
-                        <%= u.label :name, 'プロフィール画像' %>
+                        <%= u.label :profile_image, 'プロフィール画像' %>
                         <br>
                         <%= u.file_field :image %>
                       </div>
-                      <%= u.submit '更新', :class => "btn btn-primary btn-lg btn-block" %>
+                      <%= u.submit :class => "btn btn-primary btn-lg" %>
                     <% end %>
                   </div>
                 </div>

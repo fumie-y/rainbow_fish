@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
-  before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+  before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
   before_action :ensure_correct_user, {only: [:edit, :update]}
 
   # indexはURL => /usersで表示される
@@ -42,7 +42,28 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    @user.name = params[:user][:name]
+    @user.password = params[:user][:password_digest]
+    if params[:profile_image]
+      @user.image_name = "#{@user.id}.jpg"
+      profile_image = params[:user][:profile_image]
+      File.binwrite("public/user_images/#{@user.image_name}",image.read)
+    end
+
+    @user.update(users_params)
+      flash[:notice] = 'ユーザー情報を編集しました'
+      redirect_to("/users/#{@user.id}")
+    # else
+    #   render("/users/#{@user.id}/edit")
+    # end
   end
+
+  private
+    def users_params
+      params.require(:user).permit(:name, :profile_image, :password_digest)
+    end
+
 
   def login_form
   end
@@ -74,9 +95,14 @@ class UsersController < ApplicationController
   end
 
   def destroy_form
+    @user = User.find(params[:id])
   end
 
   def destory
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = 'ユーザー削除しました'
+    redirect_to("/users")
   end
 
   def ensure_correct_user
