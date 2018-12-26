@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   post 'logout' => 'users#logout'
   get 'users/:id/destroy_form' =>  'users#destroy_form'
   resources :users
-  post 'users/:id/password_update' => 'users#password_update'
   get 'users/:id/likes_photos' => 'users#likes_photos'
-  get 'users/:id/password_update' => 'users#password_update'
   # destroyは仮の画面作成
   get 'test_destroy' =>  'photos#test_destroy'
 

@@ -84,10 +84,6 @@ class UsersController < ApplicationController
     redirect_to("/login")
   end
 
-  def password_update
-    @user = User.find(params[:id])
-  end
-
   def destroy_form
     @user = User.find(params[:id])
   end
@@ -99,6 +95,7 @@ class UsersController < ApplicationController
       redirect_to("/users")
     else
       render("/users/#{@user.id}/destroy_form")
+    end
   end
 
   def ensure_correct_user
