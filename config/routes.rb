@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'
   get 'users/:id/destroy_form' =>  'users#destroy_form'
-  post 'users/:id/destroy' =>  'users#destroy'
   resources :users
-  #post "users/:id/update" => "users#update"
   post 'users/:id/password_update' => 'users#password_update'
   get 'users/:id/likes_photos' => 'users#likes_photos'
   get 'users/:id/password_update' => 'users#password_update'

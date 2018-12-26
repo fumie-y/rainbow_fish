@@ -1,61 +1,57 @@
-<div class='users-destroy'>
+<div class='users-edit'>
   <div class='edit-elements'>
     <h4 class='border-bottom'>アカウント編集</h4>
-    <!-- TODO: cardの高さを後で揃える -->
+    <!-- TODO: cardの長さを後で揃える -->
     <div class='user-edit'>
-        <div class='profile-edit-box'>
-          <div class='row'>
-            <div class="card-deck">
-              <div class="col-lg-3">
+      <div class='profile-edit-box'>
+        <div class='row'>
+          <div class="card-deck">
+            <div class="col-lg-3">
               <div class="card img-thumbnail">
-                <!-- #TODO: イメージ画像は仮,大きさは他のブランチで設定済み -->
-                <img class="card-img-top" src="/user_images/sky.jpg" width="100" height="100">
+                <%= image_tag @user.profile_image.url if @user.profile_image? %>
                 <div class="card-body">
                   <h4 class="card-title"><%= @user.name %></h4>
                   <p class="card-text">
-                    <!-- <div class="btn-group-vertical" role="group" aria-label="Basic example"> -->
-                      <button type="button" class="btn btn-outline-secondary">
-                        <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
-                      </button>
-                      <button type="button" class="btn btn-outline-secondary">
-                        <%= link_to('いいね！した数',"/users/#{@user.id}/likes_photos") %>
-                      </button>
-                      <button type="button" class="btn btn-outline-secondary">
-                        <%= link_to('新規投稿',"/photos/new") %>
-                      </button>
-                    <!-- </div> -->
+                    <button type="button" class="btn btn-outline-secondary">
+                      <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      <%= link_to('いいね！した数',"/users/#{@user.id}/likes_photos") %>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      <%= link_to('新規投稿','/photos/new') %>
+                    </button>
                   </p>
                 </div>
-                </div>
               </div>
-              <div class="col-lg-9">
+            </div>
+            <div class="col-lg-9">
               <div class="card img-thumbnail">
-                  <div class="card-title">
-                    <ul class="nav nav-tabs">
-                      <li class="nav-item">
-                        <%= link_to 'プロフィール', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
-                      </li>
-                      <li class="nav-item">
-                        <%= link_to 'パスワード変更', {:controller => "users", :action => "password_update"}, {:class => "nav-link"} %>
-                      </li>
-                      <li class="nav-item">
+                <div class="card-title">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <%= link_to 'プロフィール', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
+                    </li>
+                    <li class="nav-item">
+                      <%= link_to 'パスワード変更', {:controller => "users", :action => "password_update"}, {:class => "nav-link"} %>
+                    </li>
+                    <li class="nav-item">
                         <%= link_to '退会', {:controller => "users", :action => "destroy_form"}, {:class => "nav-link"} %>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="card-text">
-                    <P>退会しますか？</P>
-                      <p>はい</p>
-                      <p>いいえ</p>
-                      <%#= link_to('はい',"/users/#{@user.id}/destory",{method: "post"},{:class => "btn btn-outline-secondary"} ) %>
-                      <%#= link_to('いいえ',"/users/#{@user.id}/destory_form",{:class => "btn btn-outline-secondary"} ) %>
-                  </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-text">
+                  <P>退会しますか？</P>
+                  <p>はい</p>
+                  <p>いいえ</p>
+                    <%#= link_to('はい',"/users/#{@user.id}/destory",{method: "post"},{:class => "btn btn-outline-secondary"} ) %>
+                    <%#= link_to('いいえ',"/users/#{@user.id}/destory_form",{:class => "btn btn-outline-secondary"} ) %>
                 </div>
               </div>
             </div>
           </div>
-          <!-- 上記コード</row> このコメントは後で消す！ -->
         </div>
+      </div>
     </div>
   </div>
 </div>

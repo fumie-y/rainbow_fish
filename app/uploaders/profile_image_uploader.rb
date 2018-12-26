@@ -1,4 +1,4 @@
-class NewPhotoImageUploader < CarrierWave::Uploader::Base
+class ProfileImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # リサイズしたり画像形式を変更するのに必要
   include CarrierWave::RMagick
@@ -48,6 +48,7 @@ class NewPhotoImageUploader < CarrierWave::Uploader::Base
     var = :"@#{mounted_as}_secure_token"
     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
   end
+
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)

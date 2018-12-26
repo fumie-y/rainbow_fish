@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(
       name: params[:user][:name],
-      password: params[:user][:password],
+      password: params[:user][:password_digest],
       profile_image: "default_user.jpg"
     )
     if @user.save
@@ -41,29 +41,23 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+
+  def users_params
+    params.require(:user).permit(:name, :profile_image, :password_digest)
+  end
+
   def update
     @user = User.find(params[:id])
     @user.name = params[:user][:name]
     @user.password = params[:user][:password_digest]
-    if params[:profile_image]
-      @user.image_name = "#{@user.id}.jpg"
-      profile_image = params[:user][:profile_image]
-      File.binwrite("public/user_images/#{@user.image_name}",image.read)
-    end
-
-    @user.update(users_params)
+    @user.profile_image = params[:user][:profile_image]
+      if @user.update(users_params)
       flash[:notice] = 'ユーザー情報を編集しました'
       redirect_to("/users/#{@user.id}")
-    # else
-    #   render("/users/#{@user.id}/edit")
-    # end
+      else
+        render :edit
+      end
   end
-
-  private
-    def users_params
-      params.require(:user).permit(:name, :profile_image, :password_digest)
-    end
-
 
   def login_form
   end
@@ -100,9 +94,11 @@ class UsersController < ApplicationController
 
   def destory
     @user = User.find(params[:id])
-    @user.destroy
-    flash[:notice] = 'ユーザー削除しました'
-    redirect_to("/users")
+    if @user.destroy
+      flash[:notice] = 'ユーザー削除しました'
+      redirect_to("/users")
+    else
+      render("/users/#{@user.id}/destroy_form")
   end
 
   def ensure_correct_user
