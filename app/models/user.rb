@@ -8,3 +8,4 @@ class User < ApplicationRecord
   has_many :photos #dependent: :destroy(後で表示)
   has_many :likes #dependent: :destroy(後で表示)
 end
+

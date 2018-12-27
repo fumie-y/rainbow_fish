@@ -5,7 +5,7 @@
         <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "いいね！した数", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
+        <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
       </li>
       <li class="nav-item">
         <% if @user.id == @current_user.id %>
@@ -14,21 +14,22 @@
       </li>
     </ul>
     <div class='card-deck'>
-      <% @likes.each do |like| %>
+      <% @user.likes.each do |like| %>
         <div class='card-deck'>
           <div class='card-deck'>
             <div class='card'>
-              <%= link_to "/photos/#{@photo.id}" do %>
-                <%= image_tag @photo.image.thumb.url %>
+              <%= link_to "/photos/#{like.photo.id}" do %>
+                <%= image_tag like.photo.image.thumb.url %>
               <% end %>
-              <h4 class='card-title'><%= @photo.title %></h4>
-              <P class='card-text'><%= @photo.user.name %></P>
-              <P class='card-text'><%= @photo.photo_comment %></P>
-              <P class='card-text'><%= @photo.rgb %></P>
+              <h4 class='card-title'><%= like.photo.title %></h4>
+              <P class='card-text'><%= like.photo.user.name %></P>
+              <P class='card-text'><%= like.photo.photo_comment %></P>
+              <P class='card-text'><%= like.photo.rgb %></P>
               <!-- TODO: N+1問題 -->
-              <% @photo.tags.each do |tag| %>
+              <% like.photo.tags.each do |tag| %>
                 <P class='card-text'><%= tag.name %></P>
               <% end %>
+              <p class='card-text'><%= like.photo.count %></p>
             </div>
           </div>
         </div>

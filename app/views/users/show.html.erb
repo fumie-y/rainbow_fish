@@ -5,7 +5,7 @@
         <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "いいね！した数", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
+        <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
       </li>
       <li class="nav-item">
         <% if @user.id == @current_user.id %>

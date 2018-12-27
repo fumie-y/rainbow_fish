@@ -15,9 +15,6 @@ class UsersController < ApplicationController
 
   def likes_photos
     @user = User.find(params[:id])
-    @user_posted_photos = @user.photos
-    @likes = Like.where(user_id: @user.id)
-    @photo = @user_posted_photos.likes
   end
 
   def new
@@ -27,8 +24,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(
       name: params[:user][:name],
-      password: params[:user][:password],
-      profile_image: "default_user.jpg"
+      password: params[:user][:password]
     )
     if @user.save
       session[:user_id] = @user.id
