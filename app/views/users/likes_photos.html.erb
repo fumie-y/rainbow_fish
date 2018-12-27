@@ -15,19 +15,18 @@
     </ul>
     <div class='card-deck'>
       <% @likes.each do |like| %>
-        <% p = Photo.find_by(id: like.photo.id) %>
         <div class='card-deck'>
           <div class='card-deck'>
             <div class='card'>
-              <%= link_to "/photos/#{p.id}" do %>
-                <%= image_tag p.image.thumb.url %>
+              <%= link_to "/photos/#{@photo.id}" do %>
+                <%= image_tag @photo.image.thumb.url %>
               <% end %>
-              <h4 class='card-title'><%= p.title %></h4>
-              <P class='card-text'><%= p.user.name %></P>
-              <P class='card-text'><%= p.photo_comment %></P>
-              <P class='card-text'><%= p.rgb %></P>
+              <h4 class='card-title'><%= @photo.title %></h4>
+              <P class='card-text'><%= @photo.user.name %></P>
+              <P class='card-text'><%= @photo.photo_comment %></P>
+              <P class='card-text'><%= @photo.rgb %></P>
               <!-- TODO: N+1問題 -->
-              <% p.tags.each do |tag| %>
+              <% @photo.tags.each do |tag| %>
                 <P class='card-text'><%= tag.name %></P>
               <% end %>
             </div>

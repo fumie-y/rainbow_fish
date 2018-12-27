@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   post 'likes/:photo_id/create' => 'likes#create'
-  post 'likes/:photo_id/destroy' => 'likes#destroy'
+  delete 'likes/:photo_id/destroy' => 'likes#destroy'
   
   get 'inquiry' => 'top#inquiry'
   
