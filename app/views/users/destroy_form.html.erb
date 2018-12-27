@@ -37,12 +37,11 @@
                     </li>
                   </ul>
                 </div>
+                <!-- TODO: 下記link_toソースコードを統一する -->
                 <div class="card-text">
                   <P>退会しますか？</P>
-                  <p>はい</p>
-                  <p>いいえ</p>
-                    <%#= link_to('はい',"/users/#{@user.id}/destory",{method: "post"},{:class => "btn btn-outline-secondary"} ) %>
-                    <%#= link_to('いいえ',"/users/#{@user.id}/destory_form",{:class => "btn btn-outline-secondary"} ) %>
+                  <%= link_to 'はい',"/users/#{@user.id}", :method => "delete", :class => "btn btn-outline-danger" %>
+                  <%= link_to 'いいえ', {:controller => "users", :action => "destroy_form"}, {:class => "btn btn-outline-secondary"} %>
                 </div>
               </div>
             </div>

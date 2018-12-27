@@ -25,10 +25,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(
       name: params[:user][:name],
-      password: params[:user][:password_digest],
-      profile_image: "default_user.jpg"
+      profile_image: nil,
+      password: params[:user][:password],
+      password_confirmation: params[:user][:password_confirmation],
     )
-    if @user.save
+    if @user.authenticate(params[:user][:password]) && @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
       redirect_to("/users/#{@user.id}")
@@ -41,22 +42,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-
-  def users_params
-    params.require(:user).permit(:name, :profile_image, :password_digest)
-  end
-
   def update
     @user = User.find(params[:id])
     @user.name = params[:user][:name]
-    @user.password = params[:user][:password_digest]
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
     @user.profile_image = params[:user][:profile_image]
-      if @user.update(users_params)
+    if @user.save
       flash[:notice] = 'ユーザー情報を編集しました'
       redirect_to("/users/#{@user.id}")
-      else
-        render :edit
-      end
+    else
+      flash[:notice] = 'ユーザー情報の編集に失敗しました'
+      render :edit
+    end
   end
 
   def login_form
@@ -88,15 +86,22 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def destory
+  def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      flash[:notice] = 'ユーザー削除しました'
-      redirect_to("/users")
+      flash[:notice] = 'ユーザーを削除しました'
+      redirect_to("/login")
     else
       render("/users/#{@user.id}/destroy_form")
     end
   end
+
+
+  private
+
+  # def users_params
+  #   params.require(:user).permit(:name, :profile_image, :password, :password_digest)
+  # end
 
   def ensure_correct_user
     if params[:id].to_i != @current_user.id
