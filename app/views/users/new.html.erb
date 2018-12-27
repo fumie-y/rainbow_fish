@@ -6,11 +6,11 @@
         <%= message %>
       </div>
     <% end %>
-    <div class='users-NewConnections-box'>
+    <div class='signup-box'>
       <%= form_for(:user, url: users_path) do |f| %>
         <%= f.label 'ユーザー名' %>
         <%= f.text_field :name, class: "form-control" %>
-        <%= f.label :password %>
+        <%= f.label 'パスワード' %>
         <%= f.password_field :password, class: "form-control" %>
         <%= f.label 'もう一度パスワードを入力して下さい' %>
         <%= f.password_field :password_confirmation, class: "form-control" %>

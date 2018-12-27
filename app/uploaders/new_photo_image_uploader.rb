@@ -27,6 +27,10 @@ class NewPhotoImageUploader < CarrierWave::Uploader::Base
     process :resize_to_limit => [318, 180]
   end
 
+  version :thumb100 do
+    process :resize_to_fit => [100, 100]
+  end
+
   # jpg,jpeg,gif,pngしか受け付けない
   def extension_white_list
     %w(jpg jpeg gif png)
