@@ -14,7 +14,7 @@ class NewPhotoImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-#画像の上限はcameratalkのサイトを参考にしました
+  #画像の上限はcameratalkのサイトを参考にしました
 
   # 画像の上限を設定する
   process :resize_to_limit => [640, 400]
@@ -25,6 +25,10 @@ class NewPhotoImageUploader < CarrierWave::Uploader::Base
   # サムネイルを生成する設定
   version :thumb do
     process :resize_to_limit => [318, 180]
+  end
+
+  version :thumb100 do
+    process :resize_to_fit => [100, 100]
   end
 
   # jpg,jpeg,gif,pngしか受け付けない

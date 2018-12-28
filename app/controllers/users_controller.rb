@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
-  before_action :forbid_login_user, {only: [:new, :creste, :login_form, :login]}
+  before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
   before_action :ensure_correct_user, {only: [:edit, :update]}
 
   # indexはURL => /usersで表示される
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
     @user = User.new(
       name: params[:user][:name],
       password: params[:user][:password],
-      profile_image: "default_user.jpg"
+      password_confirmation: params[:user][:password_confirmation],
     )
-    if @user.save
+    if @user.authenticate(params[:user][:password]) && @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
       redirect_to("/users/#{@user.id}")
@@ -42,7 +42,21 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    @user.name = params[:user][:name]
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+    @user.profile_image = params[:user][:profile_image]
+    if @user.save
+      flash[:notice] = 'ユーザー情報を編集しました'
+      redirect_to("/users/#{@user.id}")
+    else
+      flash[:notice] = 'ユーザー情報の編集に失敗しました'
+      render :edit
+    end
   end
+
+
 
   def login_form
   end
@@ -69,15 +83,26 @@ class UsersController < ApplicationController
     redirect_to("/login")
   end
 
-  def password_update
+  def destroy_form
     @user = User.find(params[:id])
   end
 
-  def destroy_form
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:notice] = 'ユーザーを削除しました'
+      redirect_to("/login")
+    else
+      render("/users/#{@user.id}/destroy_form")
+    end
   end
 
-  def destory
-  end
+
+  private
+
+  # def user_params
+  #   params.require(:user).permit(:name, :profile_image, :password, :password_digest)
+  # end
 
   def ensure_correct_user
     if params[:id].to_i != @current_user.id

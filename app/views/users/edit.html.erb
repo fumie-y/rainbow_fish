@@ -1,52 +1,75 @@
-<div class='main users-edit'>
+<div class='users-edit'>
   <div class='edit-elements'>
-    <div class='form-heading'>アカウント編集</div>
-    <div class='col-md-3 col-sm-4 col-xs-12'>
-      <div class='post-elements'>
-       <div class='post-element'>
-        <div class='profile-account'>
-          <!-- #TODO: イメージ画像は仮です -->
-          <img src="/user_images/sky.jpg">
-          <h4 class=user-name><"<%= @user.name %>"></h4>
-          <div class="btn-group-vertical" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-dark">
-              <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
-            </button>
-            <button type="button" class="btn btn-outline-dark">
-              <%= link_to('いいね！した数',"/users/#{@user.id}/likes_photos") %>
-            </button>
-            <button type="button" class="btn btn-outline-dark">
-              <%= link_to('新規投稿',"/photos/new") %>
-            </button>
+    <h4 class='border-bottom'>アカウント編集</h4>
+    <!-- TODO: cardの長さを後で揃える -->
+    <div class='user-edit'>
+      <div class='profile-edit-box'>
+        <div class='row'>
+          <div class="card-deck">
+            <div class="col-lg-3">
+              <div class="card img-thumbnail">
+                <% if @user.profile_image.blank? %>
+                  <%= image_tag "/user_images/default_user.jpg" %>
+                <% else %>
+                  <%= image_tag @user.profile_image.url %>
+                <% end %>
+                <div class="card-body">
+                  <h4 class="card-title"><%= @user.name %></h4>
+                  <p class="card-text">
+                    <button type="button" class="btn btn-outline-secondary">
+                      <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      <%= link_to('いいね！した数',"/users/#{@user.id}/likes_photos") %>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary">
+                      <%= link_to('新規投稿','/photos/new') %>
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="card img-thumbnail">
+                <div class="card-title">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <%= link_to 'プロフィール', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to '退会', {:controller => "users", :action => "destroy_form"}, {:class => "nav-link"} %>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-text">
+                  <%= form_for (@user) do |u| %>
+                    <div class="form-group">
+                      <%= u.label :name, 'ユーザー名' %>
+                      <br>
+                      <%= u.text_field :name, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= u.label :password, '新しいパスワード' %>
+                      <br>
+                        <%= u.password_field :password, class: 'form-control' %>
+                    </div>
+                    <div class="form-group">
+                      <%= u.label 'もう一度パスワードを入力して下さい' %>
+                      <%= u.password_field :password_confirmation, class: "form-control" %>
+                    </div>
+                    <div class="form-group">
+                      <%= u.label :profile_image, 'プロフィール画像' %>
+                      <br>
+                      <%= u.file_field :profile_image %>
+                    </div>
+                    <%= u.submit :class => "btn btn-primary btn-lg" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-       </div>
       </div>
     </div>
-    <!-- 下記のコードだとまだuser指定が出来てません -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to 'プロフィール', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'パスワード変更', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
-      </li>
-      <li class="nav-item">
-        <%= link_to '退会', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
-      </li>
-    </ul>
-    
-    <!-- #TODO: プロフィール -->
-    <form>
-      <div class="form-group">
-        <label for="formGroupExampleInput">ユーザー名</label>
-        <input type="text" class="form-control" id="formGroupExampleInput">
-      </div>
-      <div class="form-group">
-        <label for="formGroupExampleInput2">プロフィール画像</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-      </div>
-      <button type="button" class="btn btn-primary">更新</button>
-    </form>
   </div>
 </div>
