@@ -46,12 +46,13 @@
           <% if @photo.user.profile_image.blank? %>
             <%= image_tag "/user_images/default_user.jpg" %>
           <% else %>
-            <%= image_tag @photo.user.profile_image.thumb.url %>
+            <%= image_tag "/user_images/#{@photo.user.profile_image}" %>
+            <!-- 下記コードはエラーが出た　profile_imageはpublicにあるから -->
+            <%#= image_tag @photo.user.profile_image.url %>
           <% end %>
-          <%#= image_tag "/user_images/#{@user.profile_image}" %>
         </p>
         <p class='text-center'>
-          <%= link_to(@photo.user.name, "/users/#{@user.id}", class: "btn btn-promary btn-lg") %>
+          <%= link_to(@photo.user.name, "/users/#{@photo.user.id}", class: "btn btn-promary btn-lg") %>
         </p>
       </div>
     </div>
@@ -59,7 +60,8 @@
   <br>
   <div class='user-post-photos'>
     <h5 class='border-bottom'>その他の投稿</h5>
-      <% @photos.each do |p| %>
+     <% binding.pry %>
+      <% @photo.each do |p| %>
         <%= link_to("/photos/#{p.id}") do %>
           <%= image_tag p.image.thumb.url %>
         <% end %>
