@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(
       name: params[:user][:name],
-      profile_image: nil,
       password: params[:user][:password],
       password_confirmation: params[:user][:password_confirmation],
     )
@@ -56,6 +55,8 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+
 
   def login_form
   end
@@ -99,7 +100,7 @@ class UsersController < ApplicationController
 
   private
 
-  # def users_params
+  # def user_params
   #   params.require(:user).permit(:name, :profile_image, :password, :password_digest)
   # end
 
