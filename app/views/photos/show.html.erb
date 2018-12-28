@@ -32,8 +32,6 @@
           <% end %>
         <% end %>
         <%= @photo.likes.count %>
-
-
       </div>
     </div>
   </div>
@@ -60,8 +58,7 @@
   <br>
   <div class='user-post-photos'>
     <h5 class='border-bottom'>その他の投稿</h5>
-     <% binding.pry %>
-      <% @photo.each do |p| %>
+      <% @other_photos.each do |p| %>
         <%= link_to("/photos/#{p.id}") do %>
           <%= image_tag p.image.thumb.url %>
         <% end %>

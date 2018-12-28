@@ -16,18 +16,17 @@
     <div class='card-deck'>
       <% @user.likes.each do |like| %>
         <div class='card-deck'>
-          <div class='card-deck'>
             <div class='card'>
               <%= link_to "/photos/#{like.photo.id}" do %>
                 <%= image_tag like.photo.image.thumb.url %>
               <% end %>
               <h4 class='card-title'><%= like.photo.title %></h4>
-              <P class='card-text'><%= like.photo.user.name %></P>
-              <P class='card-text'><%= like.photo.photo_comment %></P>
-              <P class='card-text'><%= like.photo.rgb %></P>
+              <p class='card-text'><%= like.photo.user.name %></p>
+              <p class='card-text'><%= like.photo.photo_comment %></p>
+              <p class='card-text'><%= like.photo.rgb %></p>
               <!-- TODO: N+1問題 -->
               <% like.photo.tags.each do |tag| %>
-                <P class='card-text'><%= tag.name %></P>
+                <p class='card-text'><%= tag.name %></p>
               <% end %>
               <!-- 下記コードいいね機能 -->
               <p class='card-text'>
@@ -45,7 +44,6 @@
                 <%= @user.photo.likes.count %>
               </p>
             </div>
-          </div>
         </div>
       <% end %>
     </div>
