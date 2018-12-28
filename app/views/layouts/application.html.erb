@@ -11,41 +11,50 @@
 
   <body>
     <header>
-      <div class='header-box'>
-        <form class='form-inline'>
-          <div class="form-group">
-             <%= link_to('レインボーフィッシュ', '/about') %>
+      <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <h3><%= link_to('レインボーフィッシュ', '/about') %></h3>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <% if @current_user %>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= link_to(@current_user.name) %>
+                </p>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <p class='dropdown-item'><%= link_to('アカウント編集', "/users/#{@current_user.id}/edit") %></p>
+                    <p class='dropdown-item'><%= link_to('投稿した写真', "/users/#{@current_user.id}") %></p>
+                    <p class='dropdown-item'><%= link_to('いいね！した写真', "/users/#{@current_user.id}/likes_photos") %></p>
+                    <p class='dropdown-item'><%= link_to('新規投稿', '/photos/new') %></p>
+                    <div class="dropdown-divider"></div>
+                    <p class='dropdown-item'><%= link_to('ユーザー一覧', '/users') %></p>
+                    <p class='dropdown-item'><%= link_to('投稿写真一覧', '/photos') %></p>
+                    <p class='dropdown-item'><%= link_to('お問い合わせ', '/inquiry') %></p>
+                  </div>
+              </li>
+              <li class="nav-item">
+                <p class='nav-link'><%= link_to('ログアウト', "/logout,{method: post}") %></p>
+              </li>
+            </ul>
           </div>
-          <div class="form-group">
-              <input type="text" name="name" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-primary mb-2">検索</button>
+        <% else %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <p class='nav-link'><%= link_to('新規登録', "/users/new") %></p>
+              </li>
+              <li class="nav-item">
+                <p class='nav-link'><%= link_to('ログイン', "/login") %></p>
+              </li>
+            </ul>
+        <% end %>
 
-          <!-- ログイン中のユーザーを表示する -->
-          <% if @current_user %>
-            <div class='dropdown'>
-              <div class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
-              </div>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <a class="dropdown-item" href="#!">user_edit</a>
-                  <a class="dropdown-item" href="#!">user_show</a>
-                  <a class="dropdown-item" href="#!">user-likes_photos</a>
-                  <a class="dropdown-item" href="#!">photo_new</a>
-                  <p class='border-bottom'></p>
-                  <a class="dropdown-item" href="#!">photo_index</a>
-                  <a class="dropdown-item" href="#!">user_index</a>
-                  <p class='border-bottom'></p>
-                  <a class="dropdown-item" href="#!">お問い合わせ</a>
-              </div>
-            </div>
-            <%= link_to('ログアウト', "/logout",{method: :post}) %>
-          <% else %>
-            <%= link_to('新規登録', "/users/new") %>
-            <%= link_to('ログイン', "/login") %>
-          <% end %>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success my-2 my-sm-0" type="submit">検索</button>
         </form>
-      </div>
+      </nav>
     </header>
 
     <% if flash[:notice] %>
