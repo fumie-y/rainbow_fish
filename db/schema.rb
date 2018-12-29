@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 2018_12_28_111633) do
 
-ActiveRecord::Schema.define(version: 2018_12_27_104912) do
-
-
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "photo_id"
@@ -49,4 +46,5 @@ ActiveRecord::Schema.define(version: 2018_12_27_104912) do
   end
 
 end
+
 
