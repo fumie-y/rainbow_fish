@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  post 'likes/:photo_id/create' => 'likes#create'
+  delete 'likes/:photo_id/destroy' => 'likes#destroy'
+  
   get 'inquiry' => 'top#inquiry'
+  
   get 'login' => 'users#login_form'
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'

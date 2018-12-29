@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 
   def likes_photos
     @user = User.find(params[:id])
-    @user_posted_photos = @user.photos
   end
 
   def new

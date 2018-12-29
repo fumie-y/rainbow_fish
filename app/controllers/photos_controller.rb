@@ -6,8 +6,7 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
-    @photo_tags = @photo.tags
-    @user = @photo.user
+    @other_photos = Photo.where(user_id: @current_user.id).where.not(id: params[:id])
   end
 
   def new

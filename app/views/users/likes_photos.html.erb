@@ -5,29 +5,47 @@
         <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to "いいね！した数", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
+        <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <% if @user.id == @current_user.id %>
+          <%= link_to "アカウント編集", "/users/#{@user.id}/edit", class: "nav-link" %>
+        <% end %>
       </li>
     </ul>
-  </div>
-  <% @user_posted_photos.each do |photo| %>
-    <%= photo.title %>
-    <br>
-      <% photo.tags.each do |tag| %>
-        <%= tag.name %>
-      <% end %>
-  <% end %>
-
-    <div class="card-photo" style="width: 10rem;">
-      <img class="photo-img-top" src="<%#= "/photo_images/ICAM0001.JPG" %>" width="200">
-      <div class="card-body">
-        <h5 class="photo-title"><%#= "#{@photo.title}" %></h5>
-        <!-- ５行目にユーザー名あるので１８行目いらないかもしれません -->
-        <a class="photo-user"><%#= "#{@user.name}" %></a>
-        <div class='photo-rgb'><%#= "RGB設定　#{@photo.rgb}" %></div>
-        <div class='photo-tag'><%#= "#{@tag.name}" %></div>
-        <div td align="right">
-         <%= fa_icon 'heart' %>
+    <div class='card-deck'>
+      <% @user.likes.each do |like| %>
+        <div class='card-deck'>
+            <div class='card'>
+              <%= link_to "/photos/#{like.photo.id}" do %>
+                <%= image_tag like.photo.image.thumb.url %>
+              <% end %>
+              <h4 class='card-title'><%= like.photo.title %></h4>
+              <p class='card-text'><%= like.photo.user.name %></p>
+              <p class='card-text'><%= like.photo.photo_comment %></p>
+              <p class='card-text'><%= like.photo.rgb %></p>
+              <!-- TODO: N+1問題 -->
+              <% like.photo.tags.each do |tag| %>
+                <p class='card-text'><%= tag.name %></p>
+              <% end %>
+              <!-- 下記コードいいね機能 -->
+              <p class='card-text'>
+                <% if @user.likes.find_by(user_id: @current_user.id) %>
+                  <%= link_to("/likes/#{like.photo.id}/destroy", {method: "delete"}) do %>
+                    <%= fa_icon 'heart', class: "fa-red" %>
+                    <!-- <span class="fa fa-heart like-btn-unlike"></span> -->
+                  <% end %>
+                <% else %>
+                  <%= link_to("/likes/#{@user.photo.id}/create", {method: "post"}) do %>
+                    <%= fa_icon 'heart', class: "fa-yellow" %>
+                    <!-- <span class="fa fa-heart like-btn-like"></span> -->
+                  <% end %>
+                <% end %>
+                <%= @user.likes.count %>
+              </p>
+            </div>
         </div>
-      </div>
+      <% end %>
     </div>
+  </div>
 </div>
