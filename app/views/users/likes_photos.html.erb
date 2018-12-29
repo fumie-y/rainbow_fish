@@ -30,8 +30,8 @@
               <% end %>
               <!-- 下記コードいいね機能 -->
               <p class='card-text'>
-                <% if @user.photo.likes.find_by(user_id: @current_user.id) %>
-                  <%= link_to("/likes/#{@user.photo.id}/destroy", {method: "delete"}) do %>
+                <% if @user.likes.find_by(user_id: @current_user.id) %>
+                  <%= link_to("/likes/#{like.photo.id}/destroy", {method: "delete"}) do %>
                     <%= fa_icon 'heart', class: "fa-red" %>
                     <!-- <span class="fa fa-heart like-btn-unlike"></span> -->
                   <% end %>
@@ -41,7 +41,7 @@
                     <!-- <span class="fa fa-heart like-btn-like"></span> -->
                   <% end %>
                 <% end %>
-                <%= @user.photo.likes.count %>
+                <%= @user.likes.count %>
               </p>
             </div>
         </div>
