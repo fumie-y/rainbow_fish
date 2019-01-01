@@ -5,10 +5,13 @@
         写真を削除しますか？
       </div>
     </div>
-    <div class="card-body">
-      <%#= link_to 'はい',"/photos/#{@photo.id}", :method => "delete", :class => "btn btn-outline-danger" %>
-      <%= link_to('はい', "/photos/#{@photo.id}",{method: "delete"}) %>
-      <%= link_to('いいえ', "/photos") %>
+    <div class="card-body text-center">
+      <button class="btn btn-outline-secondary btn-lg center-block">
+        <%= link_to('はい', "/photos/#{@photo.id}",{method: "delete"}) %>
+      </button>
+      <button class="btn btn-outline-secondary btn-lg center-block">
+        <%= link_to('いいえ', "/photos") %>
+      </button>
     </div>
   </div>
 </div>

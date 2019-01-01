@@ -37,10 +37,10 @@ class PhotosController < ApplicationController
     end
   end
 
-  private
-    def photo_params
-      params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
-    end
+  # private
+  #   def photo_params
+  #     params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
+  #   end
 
   def edit
     @photo = Photo.find(params[:id])
@@ -56,6 +56,7 @@ class PhotosController < ApplicationController
 
   def destroy
     @photo = Photo.find(params[:id])
+    @photo.destroy
     flash[:notice] = '写真を削除しました'
     redirect_to("/photos")
   end
