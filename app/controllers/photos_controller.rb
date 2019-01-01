@@ -50,7 +50,13 @@ class PhotosController < ApplicationController
   def update
   end
 
+  def destroy_form
+    @photo = Photo.find(params[:id])
+  end
+
   def destroy
-    redirect_to("/photos/index")
+    @photo = Photo.find(params[:id])
+    flash[:notice] = '写真を削除しました'
+    redirect_to("/photos")
   end
 end
