@@ -12,48 +12,47 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-        <h3><%= link_to('レインボーフィッシュ', '/about') %></h3>
+        <h5 class= "navbar-brand"><%= link_to('レインボーフィッシュ', '/about') %></h5>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <% if @current_user %>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-                <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <%= link_to(@current_user.name) %>
-                </p>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <p class='dropdown-item'><%= link_to('アカウント編集', "/users/#{@current_user.id}/edit") %></p>
-                    <p class='dropdown-item'><%= link_to('投稿した写真', "/users/#{@current_user.id}") %></p>
-                    <p class='dropdown-item'><%= link_to('いいね！した写真', "/users/#{@current_user.id}/likes_photos") %></p>
-                    <p class='dropdown-item'><%= link_to('新規投稿', '/photos/new') %></p>
-                    <div class="dropdown-divider"></div>
-                    <p class='dropdown-item'><%= link_to('ユーザー一覧', '/users') %></p>
-                    <p class='dropdown-item'><%= link_to('投稿写真一覧', '/photos') %></p>
-                    <p class='dropdown-item'><%= link_to('お問い合わせ', '/inquiry') %></p>
-                  </div>
-              </li>
-              <li class="nav-item">
-                <p class='nav-link'><%= link_to('ログアウト', "/logout,{method: post}") %></p>
-              </li>
-            </ul>
-          </div>
-        <% else %>
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <p class='nav-link'><%= link_to('新規登録', "/users/new") %></p>
-              </li>
-              <li class="nav-item">
-                <p class='nav-link'><%= link_to('ログイン', "/login") %></p>
-              </li>
-            </ul>
-        <% end %>
+        <!-- TODO: ’レインボーフィッシュ、検索以外の項目のズレを修正する -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+          <% if @current_user %>
+            <li class="nav-item dropdown">
+              <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= link_to(@current_user.name) %>
+              </p>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <p class='dropdown-item'><%= link_to('アカウント編集', "/users/#{@current_user.id}/edit") %></p>
+                  <p class='dropdown-item'><%= link_to('投稿した写真', "/users/#{@current_user.id}") %></p>
+                  <p class='dropdown-item'><%= link_to('いいね！した写真', "/users/#{@current_user.id}/likes_photos") %></p>
+                  <p class='dropdown-item'><%= link_to('新規投稿', '/photos/new') %></p>
+                  <div class="dropdown-divider"></div>
+                  <p class='dropdown-item'><%= link_to('ユーザー一覧', '/users') %></p>
+                  <p class='dropdown-item'><%= link_to('投稿写真一覧', '/photos') %></p>
+                  <p class='dropdown-item'><%= link_to('お問い合わせ', '/inquiry') %></p>
+                </div>
+            </li>
+            <li class="nav-item">
+              <p class='nav-link'><%= link_to('ログアウト', "/logout",{method: :post}) %></p>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <p class='nav-link'><%= link_to('新規登録', "/users/new") %></p>
+            </li>
+            <li class="nav-item">
+              <p class='nav-link'><%= link_to('ログイン', "/login") %></p>
+            </li>
+          <% end %>
+          </ul>
 
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success my-2 my-sm-0" type="submit">検索</button>
-        </form>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">検索</button>
+          </form>
+        </div>
       </nav>
     </header>
 
