@@ -56,6 +56,12 @@ class PhotosController < ApplicationController
     @photo.rgb = params[:photo][:rgb]
     @tag = params[:photo][:tag]
     if @photo.save
+      # @tag = params[:photo][:tag]
+      # if @tag.save
+      #   redirect_to("/photos/#{@photo.id}")
+      # else
+      #   render("/photos/#{@photo.id}/edit")
+      # end
       flash[:notice] = '写真を編集しました'
       redirect_to("/photos/#{@photo.id}")
     else
