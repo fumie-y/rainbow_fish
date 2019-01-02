@@ -16,7 +16,8 @@
         </div>
         <div td align="right">
         <% if @current_user.id %>
-          <%= link_to('編集',"/photos/#{@photo.id}/destroy_form", {class: "badge badge-primary"}) %>
+          <%= link_to('編集',"/photos/#{@photo.id}/edit", {class: "badge badge-primary"}) %>
+          <%= link_to('削除',"/photos/#{@photo.id}/destroy_form", {class: "badge badge-danger"}) %>
         <% end %>
         </div>
         <div class="border-bottom"></div>
