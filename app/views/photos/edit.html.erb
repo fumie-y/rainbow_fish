@@ -1,38 +1,30 @@
 <div class='photo-edit'>
   <h4 class="border-bottom border-dark">写真編集画面</h4>
-  <div class='new-elements'>
+  <div class='photo-edit-elements'>
+    <div class='card'>
+      <%= image_tag "#{@photo.image}", :class => 'img-fluid' %>
+    </div>
+     <%= form_with model: @photo, local: true do |p| %>
     <div class='form-group'>
-      <img src="<%= "/photo_images/#{@photo.image}" %>">
+      <%= p.label :name, 'タイトル' %>
+      <br>
+      <%= p.text_field :title %>
     </div>
     <div class='form-group'>
-      <P>タイトル</P>
-      <input class="form-control" type="text">
+      <%= p.label :name, 'コメント' %>
+      <br>
+      <%= p.text_area :photo_comment %>
     </div>
     <div class='form-group'>
-      <p>RGB設定</p>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <a class="dropdown-item" href="#!">R</a>
-          <a class="dropdown-item" href="#!">G</a>
-          <a class="dropdown-item" href="#!">B</a>
-          <a class="dropdown-item" href="#!">その他</a>
-        </div>
-      </div>
+      <%= p.label :name, 'RGB設定' %>
+      <br>
+      <%= p.select :rgb,[['R', 'R'], ['G', 'G'], ['B', 'B'], ['その他', 'その他']] %>
     </div>
     <div class='form-group'>
-      <P>タグ</P>
-      <input class='form-control' name='tag_text' type='text'>
+      <%= p.label :name, 'タグ' %>
+      <%= p.text_field :tag, class: 'form-control' %>
     </div>
-    <div class='form-group'>
-      <p>コメント</p>
-      <textarea class='form-control' cols="10" rows="5">
-        テスト　テスト
-      </textarea>
-    </div>
-    <button type="button" class="btn btn-primary btn-lg">編集</button>
-    <button type="button" class="btn btn-danger btn-lg">削除</button>
+    <%= p.submit :class => "btn-primary"  %>
+   <% end %>
   </div>
 </div>
