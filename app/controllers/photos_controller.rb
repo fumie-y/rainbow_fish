@@ -48,20 +48,14 @@ class PhotosController < ApplicationController
 
 
   def update
-    # binding.pry
     @photo = Photo.find(params[:id])
-    @tag = Tag.find_by(name: params[:name])
     @photo.title = params[:photo][:title]
     @photo.photo_comment = params[:photo][:photo_comment]
     @photo.rgb = params[:photo][:rgb]
-    @tag = params[:photo][:tag]
     if @photo.save
-      # @tag = params[:photo][:tag]
-      # if @tag.save
-      #   redirect_to("/photos/#{@photo.id}")
-      # else
-      #   render("/photos/#{@photo.id}/edit")
-      # end
+      tag = Tag.find_or_initialize_by(photo_id: @photo.id)
+      tag.update_tag(params[:photo][:tags_attributes].values)
+      tag.save
       flash[:notice] = '写真を編集しました'
       redirect_to("/photos/#{@photo.id}")
     else

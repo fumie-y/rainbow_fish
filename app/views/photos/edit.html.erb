@@ -20,9 +20,11 @@
       <br>
       <%= p.select :rgb,[['R', 'R'], ['G', 'G'], ['B', 'B'], ['その他', 'その他']] %>
     </div>
-    <div class='form-group'>
-      <%= p.label :name, 'タグ' %>
-      <%= p.text_field :tag, class: 'form-control' %>
+    <%= p.fields_for :tags do |tag| %>
+      <div class='form-group'>
+        <%= tag.label :tag, 'タグ' %>
+        <%= tag.text_field :name, class: 'form-control' %>
+    <% end %>
     </div>
     <%= p.submit :class => "btn-primary"  %>
    <% end %>
