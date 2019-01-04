@@ -48,7 +48,6 @@ class PhotosController < ApplicationController
 
 
   def update
-    # binding.pry
     @photo = Photo.find(params[:id])
     @photo.title = params[:photo][:title]
     @photo.photo_comment = params[:photo][:photo_comment]
