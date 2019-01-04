@@ -1,2 +1,115 @@
-<h1>Home#about</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+  <!--TODO: image_tagを全て真ん中にする -->
+<div class="about-main">
+  <div class="about-elements">
+    <div class="top-wrapper">
+      <!-- jumbotronは横幅いっぱい表示する -->
+      <div class="jumbotron jumbotron-fluid bg-info text-white">
+        <div class="container">
+          <h1 class="display-3">レインボーフィッシュへようこそ</h1>
+          <br>
+          <p class="lead text-center">このサイトは、トイカメラ「レインボーフィッシュ」で撮影した写真の投稿サイトです。</p>
+        </div>
+      </div>
+    <div class="message text-center">
+      <h2 class="border-bottom text-center">このサイトの使い方</h2>
+      <div class="card-deck">
+        <div class="card border border-0">
+          <div class="card-body">
+            <p class="card-text">撮影した写真が投稿出来ます</p>
+          </div>
+          <div class="text-center">
+            <%= image_tag ("/home_images/camera.jpg"), :size => "100x100" %>
+          </div>
+        </div>
+        <!-- TODO: できれば画像の色を変える -->
+        <div class="card border border-0">
+          <div class="card-body">
+            <p class="card-text">撮影した写真を共有出来ます</p>
+          </div>
+          <div class="text-center">
+            <%= image_tag ("/home_images/team.jpg"), :size => "100x100" %>
+          </div>
+        </div>
+        <div class="card border border-0">
+          <div class="card-body">
+            <p class="card-text">RGB設定の参考に使って下さい</p>
+          </div>
+          <div class="text-center">
+            <%= image_tag ("/home_images/musimegane.jpg"), :size => "100x100" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="main-wrapper text-center">
+      <h2 class="border-bottom text-center">RGB設定とは？</h2>
+      <p>レインボーフィッシュ最大の魅力</p>
+      <p>R（赤）、G（緑）、B（青）各色調を手動で１０段階に調整して</p>
+      <p>より自分好みの写真が楽しめる設定です。</p>
+    </div>
+    <br>
+    <!-- TODO: cardsizeが反映しないので直接入力したが、画面を小さくするとバランスが崩れる -->
+    <div class="bottom-wrapper">
+      <h2 class="border-bottom text-center">RGB設定をするとこんな写真が撮れます</h2>
+      <div class="photo-rgb-image text-center">
+        <div class="card-deck">
+          <div class="card border border-0">
+            <div class="text-center">
+              <%= image_tag ("/home_images/ICAM3.jpg"), :size => "400x300" %>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">R6 G5 B2</h4>
+            </div>
+          </div>
+          <div class="card border border-0">
+            <div class="text-center">
+              <%= image_tag ("/home_images/ICAM1.jpg"), :size => "400x300" %>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">R9 G5</h4>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card-deck">
+          <div class="card border border-0">
+            <div class="text-center">
+              <%= image_tag ("/home_images/ICAM6.jpg"), :size => "400x300" %>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">R5 G7</h4>
+            </div>
+          </div>
+          <div class="card border border-0">
+            <div class="text-center">
+              <%= image_tag ("/home_images/ICAM7.jpg"), :size => "400x300" %>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">R1 G3 B5</h4>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card-deck">
+          <div class="card border border-0">
+            <div class="text-center">
+              <%= image_tag ("/home_images/ICAM4.jpg"), :size => "400x300" %>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">R6 G3 B7</h4>
+            </div>
+          </div>
+          <div class="card border border-0">
+            <div class="text-center">
+              <%= image_tag ("/home_images/ICAM8.jpg"), :size => "400x300" %>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">R4 G2 B10</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
