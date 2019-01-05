@@ -37,10 +37,10 @@ class PhotosController < ApplicationController
     end
   end
 
-  private
-    def photo_params
-      params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
-    end
+  # private
+  #   def photo_params
+  #     params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
+  #   end
 
   def edit
     @photo = Photo.find(params[:id])
@@ -48,9 +48,22 @@ class PhotosController < ApplicationController
 
 
   def update
+    @photo = Photo.find(params[:id])
+    @photo.title = params[:photo][:title]
+    @photo.photo_comment = params[:photo][:photo_comment]
+    @photo.rgb = params[:photo][:rgb]
+    if @photo.save
+      tag = Tag.find_or_initialize_by(photo_id: @photo.id)
+      tag.update_tag(params[:photo][:tags_attributes].values)
+      tag.save
+      flash[:notice] = '写真を編集しました'
+      redirect_to("/photos/#{@photo.id}")
+    else
+      render("/photos/#{@photo.id}/edit")
+    end
   end
 
   def destroy
-    redirect_to("/photos/index")
+    redirect_to("/photos")
   end
 end

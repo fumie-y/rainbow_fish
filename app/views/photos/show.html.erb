@@ -42,11 +42,11 @@
       <div class="card-body">
         <p class='pull-left'>
           <% if @photo.user.profile_image.blank? %>
-            <%= image_tag "/user_images/default_user.jpg" %>
+            <%= image_tag "/user_images/default_user.jpg", :size => "100x100" %>
           <% else %>
-            <%= image_tag "/user_images/#{@photo.user.profile_image}" %>
+            <%#= image_tag "/user_images/#{@photo.user.profile_image}" %>
             <!-- 下記コードはエラーが出た　profile_imageはpublicにあるから -->
-            <%#= image_tag @photo.user.profile_image.url %>
+            <%= image_tag @photo.user.profile_image.thumb100.url %>
           <% end %>
         </p>
         <p class='text-center'>
