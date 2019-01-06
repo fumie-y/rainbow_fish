@@ -50,8 +50,11 @@ gem 'carrierwave'
 # image process
 gem 'rmagick'
 
-#seach form
+#search form
 gem 'ransack'
+
+#search pagination
+gem 'kaminari', '~> 0.17.0'
 
 # Localizing into Japanese
 gem 'rails-i18n'

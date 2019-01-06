@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user, {only: [:new, :create, :edit, :update, :destroy]}
   def index
-    @photos = @search.result(created_at: :desc)
+    @photos = @search.result.page(params[:page]).per(4).order('created_at DESC')
   end
 
 
