@@ -16,6 +16,7 @@ gem 'bootstrap', '~> 4.1.3'
 # Use awasomeicon
 gem 'font-awesome-rails'
 
+
 # Use jquery
 gem 'jquery-rails'
 # Use Uglifier as compressor for JavaScript assets
