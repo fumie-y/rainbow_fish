@@ -1,6 +1,13 @@
 <div class='photos-index'>
   <div class='photos-elements'>
-    <h4 class="border-bottom border-dark">投稿写真一覧</h4>
+    <div class='photos-search border-bottom'>
+      <h4>投稿写真一覧</h4>
+      <p class='photo-seach text-right'>
+        <% if params[:q].present? && params[:q][:title_cont].present? %>
+            検索結果: <%= params[:q][:title_cont] %>
+        <% end %>
+      </p>
+    </div>
   <!-- TODO: card-deckはeachの上下に入力してないと写真一覧の形として表示されない -->
   <!-- 可能であれば、後で検証する -->
     <div class="card-deck">
@@ -36,7 +43,6 @@
 <!-- 下記は検索バー、仮の表示 -->
 <div class='photos-index-search'>
   <div class="border-bottom border-dark">
-    <div class='photo-seach'>検索結果：花</div>
     <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item">

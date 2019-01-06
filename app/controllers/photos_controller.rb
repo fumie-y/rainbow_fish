@@ -1,13 +1,9 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user, {only: [:new, :create, :edit, :update, :destroy]}
   def index
-    @photos = Photo.all.order(created_at: :desc)
+    @photos = @search.result(created_at: :desc)
   end
 
-  def search
-    @q = Photo.search(search_params)
-    @photos = @q.result(distinct: true)
-  end
 
   def show
     @photo = Photo.find(params[:id])
