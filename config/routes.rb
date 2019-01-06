@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'test_destroy' =>  'photos#test_destroy'
 
   resources :photos
+  get 'search', to: 'photos#search'
   
   get '/' => 'home#top'
   get 'about' => 'home#about'

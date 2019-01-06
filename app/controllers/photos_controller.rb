@@ -4,6 +4,11 @@ class PhotosController < ApplicationController
     @photos = Photo.all.order(created_at: :desc)
   end
 
+  def search
+    @q = Photo.search(search_params)
+    @photos = @q.result(distinct: true)
+  end
+
   def show
     @photo = Photo.find(params[:id])
     @other_photos = Photo.where(user_id: @current_user.id).where.not(id: params[:id])
@@ -37,11 +42,6 @@ class PhotosController < ApplicationController
     end
   end
 
-  # private
-  #   def photo_params
-  #     params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
-  #   end
-
   def edit
     @photo = Photo.find(params[:id])
   end
@@ -65,5 +65,10 @@ class PhotosController < ApplicationController
 
   def destroy
     redirect_to("/photos")
+  end
+
+  private
+  def search_params
+    params.require(:q).permit!
   end
 end
