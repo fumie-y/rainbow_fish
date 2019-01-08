@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user, {only: [:new, :create, :edit, :update, :destroy]}
 
-  # @searchはapplication_controllerで定義
+  # @searchはapplication_controllerのset_searchメソッドで定義
   def index
     @photos = @search.result.page(params[:page]).per(4).order('created_at DESC')
   end
