@@ -3,8 +3,8 @@
     <div class='photos-search border-bottom'>
       <h4>投稿写真一覧</h4>
       <p class='photo-seach text-right'>
-        <% if params[:q].present? && params[:q][:title_cont].present? %>
-          検索結果: <%= params[:q][:title_cont] %>
+        <% if @search_word.present? && @search_word[:title_cont].present? %>
+          検索結果: <%= @search_word[:title_cont] %>
         <% end %>
       </p>
     </div>

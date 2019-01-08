@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   def set_search
     @search = Photo.ransack(params[:q])
+    @search_word = params[:q]
   end
   
   # 現在ログイン中のユーザーを常に表示
