@@ -20,7 +20,6 @@
         <% end %>
         </div>
         <div class="border-bottom"></div>
-
         <!-- TODO: fa_iconのカラー表示が機能しない（カラーは後ほど変更）、下記コードは機能しない -->
         <% if @photo.likes.find_by(user_id: @current_user&.id) %>
           <%= link_to("/likes/#{@photo.id}/destroy", {method: "delete"}) do %>
@@ -57,10 +56,10 @@
   <br>
   <div class='user-post-photos'>
     <h5 class='border-bottom'>その他の投稿</h5>
-      <% @other_photos.each do |p| %>
-        <%= link_to("/photos/#{p.id}") do %>
-          <%= image_tag p.image.thumb.url %>
-        <% end %>
+    <% @other_photos.each do |p| %>
+      <%= link_to("/photos/#{p.id}") do %>
+        <%= image_tag p.image.thumb.url %>
       <% end %>
+    <% end %>
   </div>
 </div>
