@@ -7,26 +7,22 @@
       <div class="card-body">
         <h4 class="card-title"><%= @photo.title %></h4>
         <p class="card-text"><%= @photo.photo_comment%></p>
-        <!-- TODO: rgbは文字列のズレ直す rgbは文字色だけ青にしたいのでlinkはいらない -->
-        <p class='card-title'>RGB設定<span class='btn-link'><%= @photo.rgb %></span></p>
+        <p class='card-title'>RGB設定<span class='text-primary'><%= @photo.rgb %></span></p>
         <div class="card-text">
           <% @photo.tags.each do |tag| %>
             <%= tag.name %>
           <% end %>
         </div>
         <div td align="right">
-        <% if @current_user.id %>
+        <% if @photo.user_id == @current_user&.id %>
           <%= link_to('編集',"/photos/#{@photo.id}/edit", {class: "badge badge-primary"}) %>
           <%= link_to('削除',"/photos/#{@photo.id}/destroy_form", {class: "badge badge-danger"}) %>
         <% end %>
         </div>
         <div class="border-bottom"></div>
-        <!-- <div td align="right">
-          <%#= fa_icon 'heart' %>
-        </div> -->
 
         <!-- TODO: fa_iconのカラー表示が機能しない（カラーは後ほど変更）、下記コードは機能しない -->
-        <% if @photo.likes.find_by(user_id: @current_user.id) %>
+        <% if @photo.likes.find_by(user_id: @current_user&.id) %>
           <%= link_to("/likes/#{@photo.id}/destroy", {method: "delete"}) do %>
             <%= fa_icon 'heart', class: "fa-red" %>
             <!-- <span class="fa fa-heart like-btn-unlike"></span> -->
@@ -41,8 +37,7 @@
       </div>
     </div>
   </div>
-  <!-- TODO: エラーが出たが、user_edit2とともにブランチマージ後再度画面を表示する -->
-  <!-- TODO: profile_imageアップロード機能実装後、サムネイル表示する（サムネイルまたはそれより小さいサイズ） -->
+  <br>
   <div class='photo-user-box'>
     <div class="card">
       <div class="card-body">
@@ -50,8 +45,6 @@
           <% if @photo.user.profile_image.blank? %>
             <%= image_tag "/user_images/default_user.jpg", :size => "100x100" %>
           <% else %>
-            <%#= image_tag "/user_images/#{@photo.user.profile_image}" %>
-            <!-- 下記コードはエラーが出た　profile_imageはpublicにあるから -->
             <%= image_tag @photo.user.profile_image.thumb100.url %>
           <% end %>
         </p>
@@ -71,10 +64,3 @@
       <% end %>
   </div>
 </div>
-
-
-
-
-
-
-
