@@ -1,9 +1,10 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user, {only: [:new, :create, :edit, :update, :destroy]}
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
-  
+
+  # @searchはapplication_controllerのset_searchメソッドで定義
   def index
-    @photos = Photo.all.order(created_at: :desc)
+    @photos = @search.result.page(params[:page]).per(4).order('created_at DESC')
   end
 
   def show
@@ -39,11 +40,6 @@ class PhotosController < ApplicationController
     end
   end
 
-  # private
-  #   def photo_params
-  #     params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
-  #   end
-
   def edit
     @photo = Photo.find(params[:id])
   end
@@ -76,11 +72,18 @@ class PhotosController < ApplicationController
     redirect_to("/photos")
   end
 
+
+  # private
+  # def search_params
+  #   params.require(:q).permit!
+  # end
+
   def ensure_correct_user
     @photo = Photo.find(params[:id])
     if @photo.user_id != @current_user.id
       flash[:notice] = '権限がありません'
       redirect_to("/photos")
     end
+
   end
 end
