@@ -7,3 +7,10 @@
   height: 800px;
   background-size: cover;
 }
+
+.top-message {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
