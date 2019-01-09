@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user, {only: [:new, :create, :edit, :update, :destroy]}
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   # @searchはapplication_controllerのset_searchメソッドで定義
   def index
@@ -8,7 +9,7 @@ class PhotosController < ApplicationController
 
   def show
     @photo = Photo.find(params[:id])
-    @other_photos = Photo.where(user_id: @current_user.id).where.not(id: params[:id])
+    @other_photos = Photo.where(user_id: @photo.user_id).where.not(id: params[:id])
   end
 
   def new
@@ -60,12 +61,29 @@ class PhotosController < ApplicationController
     end
   end
 
+  def destroy_form
+    @photo = Photo.find(params[:id])
+  end
+
   def destroy
+    @photo = Photo.find(params[:id])
+    @photo.destroy
+    flash[:notice] = '写真を削除しました'
     redirect_to("/photos")
   end
 
-  private
-  def search_params
-    params.require(:q).permit!
+
+  # private
+  # def search_params
+  #   params.require(:q).permit!
+  # end
+
+  def ensure_correct_user
+    @photo = Photo.find(params[:id])
+    if @photo.user_id != @current_user.id
+      flash[:notice] = '権限がありません'
+      redirect_to("/photos")
+    end
+
   end
 end
