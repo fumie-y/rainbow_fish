@@ -1,6 +1,6 @@
 <div class='photos-index'>
   <div class='photos-elements'>
-    <div class='photos-search border-bottom'>
+    <div class='photos-search border-bottom mt-3'>
       <h4>投稿写真一覧</h4>
       <p class='photo-seach text-right'>
         <% if @search_word.present? && @search_word[:title_cont].present? %>
@@ -10,7 +10,7 @@
     </div>
   <!-- TODO: card-deckはeachの上下に入力してないと写真一覧の形として表示されない -->
   <!-- 可能であれば、後で検証する -->
-    <div class="card-deck">
+    <div class="card-deck my-5">
       <% @photos.each do |photo| %>
         <div class="card-deck">
           <div class="card">
@@ -29,8 +29,17 @@
               <% photo.tags.each do |tag| %>
                 <%= tag.name %>
               <% end %>
-              <div td align="right">
-                <%= fa_icon 'heart' %>
+              <div>
+                <% if photo.likes.find_by(user_id: @current_user&.id) %>
+                  <%= link_to("/likes/#{photo.id}/destroy", {method: "delete"}) do %>
+                    <%= fa_icon 'heart' %>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/likes/#{photo.id}/create", {method: "post"}) do %>
+                    <%= fa_icon 'heart'%>
+                  <% end %>
+                <% end %>
+                <%= photo.likes.count %>
               </div>
             </div>
           </div>

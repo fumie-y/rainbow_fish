@@ -29,8 +29,19 @@
               <% p.tags.each do |tag| %>
                 <P class='card-text'><%= tag.name %></P>
               <% end %>
-            <div td align="right">
-              <%= fa_icon 'heart' %>
+            <div>
+              <p class='card-text'>
+                <% if p.likes.find_by(user_id: @current_user.id) %>
+                  <%= link_to("/likes/#{p.id}/destroy", {method: "delete"}) do %>
+                    <%= fa_icon 'heart' %>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/likes/#{p.id}/create", {method: "post"}) do %>
+                    <%= fa_icon 'heart' %>
+                  <% end %>
+                <% end %>
+                <%= p.likes.count %>
+              </p>
             </div>
           </div>
         </div>

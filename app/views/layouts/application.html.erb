@@ -12,13 +12,15 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-        <h5 class= "navbar-brand"><%= link_to('レインボーフィッシュ', '/about') %></h5>
+        <div class= " h2 navbar-brand"><%= link_to('TOP', '/') %></div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <!-- TODO: ’レインボーフィッシュ、検索以外の項目のズレを修正する -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse mt-2" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <p class='nav-link'><%= link_to('レインボーフィッシュとは？', "/about") %></p>
+            </li>
           <% if @current_user %>
             <li class="nav-item dropdown">
               <p class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +34,7 @@
                   <div class="dropdown-divider"></div>
                   <p class='dropdown-item'><%= link_to('ユーザー一覧', '/users') %></p>
                   <p class='dropdown-item'><%= link_to('投稿写真一覧', '/photos') %></p>
-                  <p class='dropdown-item'><%= link_to('お問い合わせ', '/inquiry') %></p>
+                  <p class='dropdown-item'><%= link_to('お問合わせ', '/inquiry') %></p>
                 </div>
             </li>
             <li class="nav-item">
@@ -45,17 +47,22 @@
             <li class="nav-item">
               <p class='nav-link'><%= link_to('ログイン', "/login") %></p>
             </li>
+            <li class="nav-item">
+              <p class='nav-link'><%= link_to('投稿写真一覧', "/photos") %></p>
+            </li>
+            <li class="nav-item">
+              <p class='nav-link'><%= link_to('お問合わせ', "/inquiry") %></p>
+            </li>
           <% end %>
           </ul>
           <%= search_form_for @search do |f| %>
-            <%= f.label :title_cont, '写真タイトル' %>
+            <%= f.label :title_cont, '写真タイトル:', :class => "text-primary" %>
             <%= f.search_field :title_cont %>
-            <%= f.submit '検索' %>
+            <%= f.submit '検索', :class => "btn-primary" %>
           <% end %>
         </div>
       </nav>
     </header>
-
     <% if flash[:notice] %>
       <div class="alert alert-success" role="alert">
         <%= flash[:notice] %>
