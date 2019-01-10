@@ -1,12 +1,15 @@
 class PhotosController < ApplicationController
   before_action :authenticate_user, {only: [:new, :create, :edit, :update, :destroy]}
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
+
+  # @searchはapplication_controllerのset_searchメソッドで定義
   def index
-    @photos = Photo.all.order(created_at: :desc)
+    @photos = @search.result.page(params[:page]).per(4).order('created_at DESC')
   end
 
   def show
     @photo = Photo.find(params[:id])
-    @other_photos = Photo.where(user_id: @current_user.id).where.not(id: params[:id])
+    @other_photos = Photo.where(user_id: @photo.user_id).where.not(id: params[:id])
   end
 
   def new
@@ -37,20 +40,50 @@ class PhotosController < ApplicationController
     end
   end
 
-  private
-    def photo_params
-      params.require(:photo).permit(:title, :photo_comment, :rgb, :image, :user_id)
-    end
-
   def edit
     @photo = Photo.find(params[:id])
   end
 
 
   def update
+    @photo = Photo.find(params[:id])
+    @photo.title = params[:photo][:title]
+    @photo.photo_comment = params[:photo][:photo_comment]
+    @photo.rgb = params[:photo][:rgb]
+    if @photo.save
+      tag = Tag.find_or_initialize_by(photo_id: @photo.id)
+      tag.update_tag(params[:photo][:tags_attributes].values)
+      tag.save
+      flash[:notice] = '写真を編集しました'
+      redirect_to("/photos/#{@photo.id}")
+    else
+      render("/photos/#{@photo.id}/edit")
+    end
+  end
+
+  def destroy_form
+    @photo = Photo.find(params[:id])
   end
 
   def destroy
-    redirect_to("/photos/index")
+    @photo = Photo.find(params[:id])
+    @photo.destroy
+    flash[:notice] = '写真を削除しました'
+    redirect_to("/photos")
+  end
+
+
+  # private
+  # def search_params
+  #   params.require(:q).permit!
+  # end
+
+  def ensure_correct_user
+    @photo = Photo.find(params[:id])
+    if @photo.user_id != @current_user.id
+      flash[:notice] = '権限がありません'
+      redirect_to("/photos")
+    end
+
   end
 end
