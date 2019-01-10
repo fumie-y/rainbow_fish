@@ -61,10 +61,6 @@ class PhotosController < ApplicationController
     end
   end
 
-  def destroy_form
-    @photo = Photo.find(params[:id])
-  end
-
   def destroy
     @photo = Photo.find(params[:id])
     @photo.destroy

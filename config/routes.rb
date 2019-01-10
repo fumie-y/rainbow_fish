@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   get 'users/:id/destroy_form' =>  'users#destroy_form'
   resources :users
   get 'users/:id/likes_photos' => 'users#likes_photos'
-  # destroyは仮の画面作成
-  get 'photos/:id/destroy_form' =>  'photos#destroy_form'
   resources :photos
   
   get '/' => 'home#top'
