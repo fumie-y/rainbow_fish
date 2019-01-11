@@ -1,20 +1,22 @@
 <div class='user-show'>
   <div class='show-elements'>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <% if @user.id == @current_user.id %>
-          <%= link_to "アカウント編集", "/users/#{@user.id}/edit", class: "nav-link" %>
-        <% end %>
-      </li>
-    </ul>
+    <div class='mt-5'>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <% if @user.id == @current_user.id %>
+            <%= link_to "アカウント編集", "/users/#{@user.id}/edit", class: "nav-link" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
     <!-- TODO: cardサイズはphoto.indexでgem導入済み、マージ後再度試す -->
-    <div class='card-deck'>
+    <div class='card-deck mt-3'>
       <% @user_posted_photos.each do |p| %>
         <div class='card-deck'>
           <div class='card'>
@@ -29,8 +31,19 @@
               <% p.tags.each do |tag| %>
                 <P class='card-text'><%= tag.name %></P>
               <% end %>
-            <div td align="right">
-              <%= fa_icon 'heart' %>
+            <div>
+              <p class='card-text'>
+                <% if p.likes.find_by(user_id: @current_user.id) %>
+                  <%= link_to("/likes/#{p.id}/destroy", {method: "delete"}) do %>
+                    <%= fa_icon 'heart' %>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/likes/#{p.id}/create", {method: "post"}) do %>
+                    <%= fa_icon 'heart' %>
+                  <% end %>
+                <% end %>
+                <%= p.likes.count %>
+              </p>
             </div>
           </div>
         </div>

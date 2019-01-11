@@ -1,5 +1,6 @@
 <div class='photos-show'>
   <div class='photo-show-elements'>
+    <h4 class="mt-5 border-bottom">投稿写真詳細</h4>
     <!-- TODO: cardの大きさは後でSCSSで変更 -->
     <div class="card">
     <!-- TODO: image_tagのサイズを後で変更する -->
@@ -7,29 +8,46 @@
       <div class="card-body">
         <h4 class="card-title"><%= @photo.title %></h4>
         <p class="card-text"><%= @photo.photo_comment%></p>
-        <p class='card-title'>RGB設定<span class='text-primary'><%= @photo.rgb %></span></p>
+        <p class='card-title'>RGB設定<span class='text-primary ml-3 h5'><%= @photo.rgb %></span></p>
         <div class="card-text">
           <% @photo.tags.each do |tag| %>
             <%= tag.name %>
           <% end %>
         </div>
-        <div td align="right">
+        <div class="mb-1" td align="right">
         <% if @photo.user_id == @current_user&.id %>
           <%= link_to('編集',"/photos/#{@photo.id}/edit", {class: "badge badge-primary"}) %>
-          <%= link_to('削除',"/photos/#{@photo.id}/destroy_form", {class: "badge badge-danger"}) %>
+          <!-- modal button -->
+          <button type="badge" class="badge badge-danger" data-toggle="modal" data-target="#exampleModal">削除</button>
+          <!-- madal start -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">写真を削除しますか？</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-fotter text-center my-3">
+                  <%= link_to('はい', "/photos/#{@photo.id}",{method: "delete", class: "btn btn-danger"}) %>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">いいえ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- modal end -->
         <% end %>
         </div>
         <div class="border-bottom"></div>
-        <!-- TODO: fa_iconのカラー表示が機能しない（カラーは後ほど変更）、下記コードは機能しない -->
+        <!-- TODO: 時間あればfa_iconのカラー表示変更させる-->
         <% if @photo.likes.find_by(user_id: @current_user&.id) %>
           <%= link_to("/likes/#{@photo.id}/destroy", {method: "delete"}) do %>
             <%= fa_icon 'heart', class: "fa-red" %>
-            <!-- <span class="fa fa-heart like-btn-unlike"></span> -->
           <% end %>
         <% else %>
           <%= link_to("/likes/#{@photo.id}/create", {method: "post"}) do %>
             <%= fa_icon 'heart', class: "fa-yellow" %>
-            <!-- <span class="fa fa-heart like-btn-like"></span> -->
           <% end %>
         <% end %>
         <%= @photo.likes.count %>
@@ -42,12 +60,13 @@
       <div class="card-body">
         <p class='pull-left'>
           <% if @photo.user.profile_image.blank? %>
-            <%= image_tag "/user_images/default_user.jpg", :size => "100x100" %>
+            <%= image_tag "/user_images/default_user.jpg", :class => "img-thumbnail", :size => "200x200" %>
           <% else %>
-            <%= image_tag @photo.user.profile_image.thumb100.url %>
+            <%= image_tag @photo.user.profile_image.thumb200.url, :class => "img-thumbnail"  %>
           <% end %>
         </p>
-        <p class='text-center'>
+        <!-- TODO: CSSで文字サイズを変更する(h1) -->
+        <p class='text-center mt-5 h3'>
           <%= link_to(@photo.user.name, "/users/#{@photo.user.id}", class: "btn btn-promary btn-lg") %>
         </p>
       </div>
@@ -58,7 +77,7 @@
     <h5 class='border-bottom'>その他の投稿</h5>
     <% @other_photos.each do |p| %>
       <%= link_to("/photos/#{p.id}") do %>
-        <%= image_tag p.image.thumb.url %>
+        <%= image_tag p.image.thumb.url, :class => "img-thumbnail" %>
       <% end %>
     <% end %>
   </div>

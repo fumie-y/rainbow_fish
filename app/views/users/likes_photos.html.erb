@@ -1,19 +1,21 @@
 <div class='users-show'>
   <div class='elements'>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <% if @user.id == @current_user.id %>
-          <%= link_to "アカウント編集", "/users/#{@user.id}/edit", class: "nav-link" %>
-        <% end %>
-      </li>
-    </ul>
-    <div class='card-deck'>
+    <div class='mt-5'>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <% if @user.id == @current_user.id %>
+            <%= link_to "アカウント編集", "/users/#{@user.id}/edit", class: "nav-link" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class='card-deck mt-3'>
       <% @user.likes.each do |like| %>
         <div class='card-deck'>
             <div class='card'>

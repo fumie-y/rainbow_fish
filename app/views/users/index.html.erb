@@ -10,7 +10,7 @@
               <% if user.profile_image.blank? %>
                 <%= image_tag "/user_images/default_user.jpg", :size => "100x100" %>
               <% else %>
-                <%= image_tag user.profile_image.thumb100.url %>
+                <%= image_tag user.profile_image.thumb200.url %>
               <% end %>
             </div>
             <br>
