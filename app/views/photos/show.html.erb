@@ -40,17 +40,16 @@
         <% end %>
         </div>
         <div class="border-bottom"></div>
-        <!-- TODO: 時間あればfa_iconのカラー表示変更させる-->
-        <% if @photo.likes.find_by(user_id: @current_user&.id) %>
-          <%= link_to("/likes/#{@photo.id}/destroy", {method: "delete"}) do %>
-            <%= fa_icon 'heart', class: "fa-red" %>
+          <% if @photo.likes.find_by(user_id: @current_user&.id) %>
+            <%= link_to("/likes/#{@photo.id}/destroy", {method: "delete"}) do %>
+              <span class="fa fa-heart like-btn-unlike text-danger"></span>
+            <% end %>
+          <% else %>
+            <%= link_to("/likes/#{@photo.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn text-secondary"></span>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= link_to("/likes/#{@photo.id}/create", {method: "post"}) do %>
-            <%= fa_icon 'heart', class: "fa-yellow" %>
-          <% end %>
-        <% end %>
-        <%= @photo.likes.count %>
+          <%= @photo.likes.count %>
       </div>
     </div>
   </div>

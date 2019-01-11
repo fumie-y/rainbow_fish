@@ -64,9 +64,9 @@
       </nav>
     </header>
     <% if flash[:notice] %>
-      <div class="alert alert-success" role="alert">
+      <p class="alert alert-success" role="alert">
         <%= flash[:notice] %>
-      </div>
+      </p>
     <% end %>
     <div class='bg-light'>
       <%=  yield %>

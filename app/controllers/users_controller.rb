@@ -32,6 +32,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'ユーザー登録が完了しました'
       redirect_to("/users/#{@user.id}")
     else
+      @error_message = "再度どちらも入力して下さい"
       render("/users/new")
     end
   end
@@ -55,8 +56,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-
   def login_form
   end
 
@@ -68,9 +67,6 @@ class UsersController < ApplicationController
       redirect_to("/photos")
     else
       @error_message = "再度どちらも入力して下さい"
-      #TODO: 初期値の表示をするかどうかは後で決める
-      # @name = params[:name]
-      # @password = params[:password]
       render("users/login_form")
 
     end
