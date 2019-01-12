@@ -25,17 +25,19 @@ class PhotosController < ApplicationController
       user_id: @current_user.id
     )
      # ToDo:時間があったらロールバック処理を追加、データ移行
-    if @photo.save!
+    if @photo.save
       @tag = Tag.new(
         name: params[:photo][:tag],
         photo_id: @photo.id
         )
         if @tag.save
+          flash[:success] = '写真を投稿しました'
           redirect_to("/photos")
         else
           render("photos/new")
         end
     else
+      flash[:danger] = 'タイトルや写真情報を入力して下さい'
       render("photos/new")
     end
   end

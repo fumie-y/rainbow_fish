@@ -1,72 +1,77 @@
-<div class='users-edit'>
-  <div class='edit-elements'>
-    <h4 class='border-bottom mt-5'>アカウント編集</h4>
-    <!-- TODO: 画像の大きさをCSSで調整する（四角にする） -->
-    <div class='user-edit'>
-      <div class='profile-image-box'>
-        <div class='row'>
-          <div class="card-deck">
-            <div class="col-lg-4">
-              <div class="card img-thumbnail">
-                <% if @user.profile_image.blank? %>
-                  <%= image_tag "/user_images/default_user.jpg" %>
-                <% else %>
-                  <%= image_tag @user.profile_image.url %>
-                <% end %>
-                <div class="card-body text-center">
-                  <h4 class="card-title text-center"><%= @user.name %></h4>
-                  <p class="card-text">
-                    <button type="button" class="btn btn-link">
-                      <%= link_to('投稿写真一覧',"/users/#{@user.id}") %>
-                    </button>
-                    <button type="button" class="btn btn-link">
-                      <%= link_to('いいね！した数',"/users/#{@user.id}/likes_photos") %>
-                    </button>
-                    <button type="button" class="btn btn-link">
-                      <%= link_to('新規投稿','/photos/new') %>
-                    </button>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="user-edit-box col-lg-8">
-              <div class="card img-thumbnail">
-                <div class="card-title">
-                  <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                      <%= link_to 'プロフィール', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to '退会', {:controller => "users", :action => "destroy_form"}, {:class => "nav-link"} %>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="card-text text-center">
-                  <P class='my-3'>退会しますか？</P>
-                  <!-- modal button -->
-                  <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">はい</button>
-                  <!-- madal start -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">本当に退会してよろしいですか？</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-center my-3">
-                          <%= link_to 'はい', "/users/#{@user.id}", :method => "delete", :class => "btn btn-outline-danger" %>
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
-                          </div>
-                      </div>
+<div class='users-destroy_form'>
+  <div class='mt-5 mx-5'>
+    <div class='user-destroy-elements container'>
+      <h4 class='border-bottom mt-5'>アカウント編集</h4>
+      <ul class="nav nav-tabs mt-3">
+        <li class="nav-item">
+          <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "いいね！した写真一覧", "/users/#{@user.id}/likes_photos", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <% if @user.id == @current_user.id %>
+            <%= link_to "アカウント編集", "/users/#{@user.id}/edit", class: "nav-link" %>
+          <% end %>
+        </li>
+      </ul>
+      <!-- 左のプロフィールのサイズ小さくする -->
+      <div class='user-destroy-form-place mt-3'>
+        <div class='profile-image-box'>
+          <div class='row'>
+            <div class="card-deck">
+              <!-- <div class="col-lg-4"> -->
+                <div class="card">
+                  <div class='text-center mt-3'>
+                    <% if @user.profile_image.blank? %>
+                      <%= image_tag "/user_images/default_user.jpg", :size => "200x200" %>
+                    <% else %>
+                      <%= image_tag @user.profile_image.thumb200.url %>
+                    <% end %>
+                    <div class='card-body'>
+                      <h4 class="card-title text-center mt-3"><%= @user.name %></h4>
                     </div>
                   </div>
-                  <!-- modal end -->
-                  <%= link_to 'いいえ', {:controller => "users", :action => "destroy_form"}, {:class => "btn btn-outline-secondary my-3 mx-3"} %>
                 </div>
-              </div>
+              <!-- </div> -->
+              <!-- <div class="user-edit-box col-lg-8"> -->
+                <div class="card" style="width: 60rem;">
+                  <div class="card-body">
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <%= link_to 'プロフィール', {:controller => "users", :action => "edit"}, {:class => "nav-link"} %>
+                      </li>
+                      <li class="nav-item">
+                        <%= link_to '退会', {:controller => "users", :action => "destroy_form"}, {:class => "nav-link"} %>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body h3 text-center">
+                    <P>退会しますか？</P>
+                    <!-- modal button -->
+                    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">はい</button>
+                    <!-- madal start -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">本当に退会してよろしいですか？</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-center my-3">
+                            <%= link_to 'はい', "/users/#{@user.id}", :method => "delete", :class => "btn btn-outline-danger" %>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- modal end -->
+                    <%= link_to 'いいえ', {:controller => "users", :action => "edit"}, {:class => "btn btn-outline-secondary my-3 mx-3"} %>
+                  </div>
+                </div>
+              <!-- </div> -->
             </div>
           </div>
         </div>

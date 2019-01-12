@@ -1,7 +1,8 @@
-<div class='users-show'>
-  <div class='elements'>
-    <div class='mt-5'>
-      <ul class="nav nav-tabs">
+<div class='users-likes-photo'>
+  <div class='mt-5 mx-5'>
+    <div class='likes-photos-elements container'>
+      <h4 class="border-bottom">いいね！した写真一覧</h4>
+      <ul class="nav nav-tabs mt-3">
         <li class="nav-item">
           <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
         </li>
@@ -14,40 +15,38 @@
           <% end %>
         </li>
       </ul>
-    </div>
-    <div class='card-deck mt-3'>
-      <% @user.likes.each do |like| %>
-        <div class='card-deck'>
-            <div class='card'>
-              <%= link_to "/photos/#{like.photo.id}" do %>
-                <%= image_tag like.photo.image.thumb.url %>
-              <% end %>
-              <h4 class='card-title'><%= like.photo.title %></h4>
-              <p class='card-text'><%= like.photo.user.name %></p>
-              <p class='card-text'><%= like.photo.photo_comment %></p>
-              <p class='card-text'><%= like.photo.rgb %></p>
-              <!-- TODO: N+1問題 -->
-              <% like.photo.tags.each do |tag| %>
-                <p class='card-text'><%= tag.name %></p>
-              <% end %>
-              <!-- 下記コードいいね機能 -->
-              <p class='card-text'>
-                <% if @user.likes.find_by(user_id: @current_user.id) %>
-                  <%= link_to("/likes/#{like.photo.id}/destroy", {method: "delete"}) do %>
-                    <%= fa_icon 'heart', class: "fa-red" %>
-                    <!-- <span class="fa fa-heart like-btn-unlike"></span> -->
-                  <% end %>
-                <% else %>
-                  <%= link_to("/likes/#{@user.photo.id}/create", {method: "post"}) do %>
-                    <%= fa_icon 'heart', class: "fa-yellow" %>
-                    <!-- <span class="fa fa-heart like-btn-like"></span> -->
-                  <% end %>
+      <div class='card-deck mt-3'>
+        <% @user.likes.each do |like| %>
+          <div class='card-deck'>
+              <div class='card'>
+                <%= link_to "/photos/#{like.photo&.id}" do %>
+                  <%= image_tag like.photo.image.thumb.url %>
                 <% end %>
-                <%= @user.likes.count %>
-              </p>
-            </div>
-        </div>
-      <% end %>
+                <h4 class='card-title'><%= like.photo.title %></h4>
+                <p class='card-text'><%= like.photo.user.name %></p>
+                <p class='card-text'><%= like.photo.photo_comment %></p>
+                <p class='card-text'><%= like.photo.rgb %></p>
+                <!-- TODO: N+1問題 -->
+                <% like.photo.tags.each do |tag| %>
+                  <p class='card-text'><%= tag.name %></p>
+                <% end %>
+                <!-- 下記コードいいね機能,いいねをカウント出来るのはphoto_showのみ -->
+                <p class='card-text'>
+                  <% if @user.likes.find_by(user_id: @current_user.id) %>
+                    <%#= link_to("/likes/#{like.photo.id}/destroy", {method: "delete"}) do %>
+                      <span class="fa fa-heart like-btn-unlike text-danger"></span>
+                    <%# end %>
+                  <% else %>
+                    <%#= link_to("/likes/#{@user.photo.id}/create", {method: "post"}) do %>
+                      <span class="fa fa-heart like-btn text-secondary"></span>
+                    <%# end %>
+                  <% end %>
+                  <%= Like.where(photo_id: like.photo_id).count %>
+                </p>
+              </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

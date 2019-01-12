@@ -1,7 +1,8 @@
 <div class='user-show'>
-  <div class='show-elements'>
-    <div class='mt-5'>
-      <ul class="nav nav-tabs">
+  <div class='mt-5 mx-5'>
+    <div class='show-elements container'>
+      <h4 class="border-bottom">投稿写真一覧</h4>
+      <ul class="nav nav-tabs mt-3">
         <li class="nav-item">
           <%= link_to "#{@user.name}さんの投稿写真一覧", "/users/#{@user.id}", class: "nav-link" %>
         </li>
@@ -14,40 +15,40 @@
           <% end %>
         </li>
       </ul>
-    </div>
-    <!-- TODO: cardサイズはphoto.indexでgem導入済み、マージ後再度試す -->
-    <div class='card-deck mt-3'>
-      <% @user_posted_photos.each do |p| %>
-        <div class='card-deck'>
-          <div class='card'>
-            <%= link_to "/photos/#{p.id}" do %>
-              <%= image_tag p.image.thumb.url %>
-            <% end %>
-            <h4 class='card-title'><%= p.title %></h4>
-            <P class='card-text'><%= p.user.name %></P>
-            <P class='card-text'><%= p.photo_comment %></P>
-            <P class='card-text'><%= p.rgb %></P>
-            <!-- TODO: N+1問題 -->
-              <% p.tags.each do |tag| %>
-                <P class='card-text'><%= tag.name %></P>
+      <!-- TODO: cardサイズはphoto.indexでgem導入済み、マージ後再度試す -->
+      <div class='card-deck mt-3'>
+        <% @user_posted_photos.each do |p| %>
+          <div class='card-deck'>
+            <div class='card'>
+              <%= link_to "/photos/#{p.id}" do %>
+                <%= image_tag p.image.thumb.url %>
               <% end %>
-            <div>
-              <p class='card-text'>
-                <% if p.likes.find_by(user_id: @current_user.id) %>
-                  <%= link_to("/likes/#{p.id}/destroy", {method: "delete"}) do %>
-                    <%= fa_icon 'heart' %>
-                  <% end %>
-                <% else %>
-                  <%= link_to("/likes/#{p.id}/create", {method: "post"}) do %>
-                    <%= fa_icon 'heart' %>
-                  <% end %>
+              <h4 class='card-title'><%= p.title %></h4>
+              <p class='card-text'><%= p.user.name %></p>
+              <p class='card-text'><%= p.photo_comment %></p>
+              <p class='card-text'><%= p.rgb %></p>
+              <!-- TODO: N+1問題 -->
+                <% p.tags.each do |tag| %>
+                  <p class='card-text'><%= tag.name %></p>
                 <% end %>
-                <%= p.likes.count %>
-              </p>
+              <div>
+                <p class='card-text'>
+                  <% if p.likes.find_by(user_id: @current_user.id) %>
+                    <%#= link_to("/likes/#{p.id}/destroy", {method: "delete"}) do %>
+                      <span class="fa fa-heart like-btn-unlike text-danger"></span>
+                    <%# end %>
+                  <% else %>
+                    <%#= link_to("/likes/#{p.id}/create", {method: "post"}) do %>
+                      <span class="fa fa-heart like-btn text-secondary"></span>
+                    <%# end %>
+                  <% end %>
+                  <%= p.likes.count %>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

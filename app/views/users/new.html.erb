@@ -1,22 +1,26 @@
 <div class='main users-new_form'>
-  <div class='user-new-elements'>
-    <h3 class='border-bottom'>ユーザー新規登録</h3>
-    <% @user.errors.full_messages.each do |message| %>
-      <div class="alert alert-danger" role="alert">
-        <%= message %>
-      </div>
-    <% end %>
-    <div class='signup-box'>
-      <%= form_for(:user, url: users_path) do |f| %>
-        <%= f.label 'ユーザー名' %>
-        <%= f.text_field :name, class: "form-control" %>
-        <%= f.label 'パスワード' %>
-        <%= f.password_field :password, class: "form-control" %>
-        <%= f.label 'もう一度パスワードを入力して下さい' %>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
-        <br>
-        <%= f.submit '新規登録', class: "btn btn-primary" %>
+  <div class='mt-5 mx-5'>
+    <div class='user-new-elements container'>
+      <h4 class='border-bottom'>ユーザー新規登録</h4>
+      <% if @error_message %>
+          <div class='form_error'>
+            <div class="alert alert-danger" role="alert">
+              <%= @error_message %>
+            </div>
+          </div>
       <% end %>
+      <div class='signup-box'>
+        <%= form_for(:user, url: users_path) do |f| %>
+          <%= f.label 'ユーザー名' %>
+          <%= f.text_field :name, class: "form-control" %>
+          <%= f.label 'パスワード' %>
+          <%= f.password_field :password, class: "form-control" %>
+          <%= f.label 'もう一度パスワードを入力して下さい' %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+          <br>
+          <%= f.submit '新規登録', class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

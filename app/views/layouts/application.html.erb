@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body style="background-color: #fbfafa;">
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class= " h2 navbar-brand"><%= link_to('TOP', '/') %></div>
@@ -34,6 +34,7 @@
                   <div class="dropdown-divider"></div>
                   <p class='dropdown-item'><%= link_to('ユーザー一覧', '/users') %></p>
                   <p class='dropdown-item'><%= link_to('投稿写真一覧', '/photos') %></p>
+                  <p class='dropdown-item'><%= link_to('退会', "/users/#{@current_user.id}/destroy_form") %></p>
                   <p class='dropdown-item'><%= link_to('お問合わせ', '/inquiry') %></p>
                 </div>
             </li>
@@ -63,12 +64,8 @@
         </div>
       </nav>
     </header>
-    <% if flash[:notice] %>
-      <div class="alert alert-success" role="alert">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
-    <div class='bg-light'>
+
+    <div style="background-color: #fbfafa;">
       <%=  yield %>
     </div>
   </body>
