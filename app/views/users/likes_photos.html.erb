@@ -19,7 +19,7 @@
         <% @user.likes.each do |like| %>
           <div class='card-deck'>
               <div class='card'>
-                <%= link_to "/photos/#{like.photo.id}" do %>
+                <%= link_to "/photos/#{like.photo&.id}" do %>
                   <%= image_tag like.photo.image.thumb.url %>
                 <% end %>
                 <h4 class='card-title'><%= like.photo.title %></h4>
@@ -41,7 +41,7 @@
                       <span class="fa fa-heart like-btn text-secondary"></span>
                     <%# end %>
                   <% end %>
-                  <%= like.where(photo_id: like.photo_id) %>
+                  <%= Like.where(photo_id: like.photo_id).count %>
                 </p>
               </div>
           </div>
