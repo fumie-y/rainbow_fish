@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .main-container {
+  position: relative;
   background-image: url("/home_images/top.jpg");
   height: 800px;
   background-size: cover;
@@ -10,7 +11,7 @@
 
 .top-message {
   position: absolute;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
 }
 

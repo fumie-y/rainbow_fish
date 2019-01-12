@@ -41,7 +41,7 @@
                       <span class="fa fa-heart like-btn text-secondary"></span>
                     <%# end %>
                   <% end %>
-                  <%= @user.likes.count %>
+                  <%= like.where(photo_id: like.photo_id) %>
                 </p>
               </div>
           </div>

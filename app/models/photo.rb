@@ -8,6 +8,6 @@ class Photo < ApplicationRecord
   has_many :tags
   accepts_nested_attributes_for :tags
 
-  has_many :likes, :dependent => :destroy
+  has_many :likes, dependent: :destroy
   belongs_to :user
 end

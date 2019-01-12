@@ -31,13 +31,13 @@ class PhotosController < ApplicationController
         photo_id: @photo.id
         )
         if @tag.save
-          flash[:notice] = '写真を投稿しました'
+          flash[:success] = '写真を投稿しました'
           redirect_to("/photos")
         else
           render("photos/new")
         end
     else
-      flash[:notice] = 'タイトルや写真情報を入力して下さい'
+      flash[:danger] = 'タイトルや写真情報を入力して下さい'
       render("photos/new")
     end
   end

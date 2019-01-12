@@ -1,6 +1,13 @@
 <!-- 新規投稿が成功するとphotos#indexに飛ぶ -->
 <div class='Photos-new'>
   <h4 class="border-bottom my-3 pb-3">新規投稿</h4>
+  <div class='form-error'>
+    <% if flash[:notice] %>
+      <p class="alert alert-danger" role="alert">
+        <%= flash[:notice] %>
+      </p>
+    <% end %>
+  </div>
   <div class='new-element'>
     <div class="card" style="width: 30rem;">
       <div class="card-body my-2">
