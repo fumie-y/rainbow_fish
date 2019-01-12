@@ -51,7 +51,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'ユーザー情報を編集しました'
       redirect_to("/users/#{@user.id}")
     else
-      flash[:notice] = 'ユーザー情報の編集に失敗しました'
+      @error_message = 'ユーザー情報の編集に失敗しました'
       render :edit
     end
   end

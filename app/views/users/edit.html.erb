@@ -1,4 +1,9 @@
 <div class='users-edit'>
+  <% if @error_message %>
+    <p class="alert alert-danger" role="alert">
+      <%= @error_message %>
+    </p>
+  <% end %>
   <div class='mt-5 mx-5'>
     <div class='user-edit-elements container'>
       <h4 class='border-bottom'>アカウント編集</h4>

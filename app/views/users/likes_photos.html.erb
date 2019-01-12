@@ -33,13 +33,9 @@
                 <!-- 下記コードいいね機能,いいねをカウント出来るのはphoto_showのみ -->
                 <p class='card-text'>
                   <% if @user.likes.find_by(user_id: @current_user.id) %>
-                    <%#= link_to("/likes/#{like.photo.id}/destroy", {method: "delete"}) do %>
-                      <span class="fa fa-heart like-btn-unlike text-danger"></span>
-                    <%# end %>
+                    <span class="fa fa-heart like-btn-unlike text-danger"></span>
                   <% else %>
-                    <%#= link_to("/likes/#{@user.photo.id}/create", {method: "post"}) do %>
-                      <span class="fa fa-heart like-btn text-secondary"></span>
-                    <%# end %>
+                    <span class="fa fa-heart like-btn text-secondary"></span>
                   <% end %>
                   <%= Like.where(photo_id: like.photo_id).count %>
                 </p>

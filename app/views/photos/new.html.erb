@@ -1,5 +1,10 @@
 <!-- 新規投稿が成功するとphotos#indexに飛ぶ -->
 <div class='Photos-new'>
+  <% if @error_message %>
+    <p class="alert alert-danger" role="alert">
+      <%= @error_message %>
+    </p>
+  <% end %>
   <h4 class="border-bottom my-3 pb-3">新規投稿</h4>
   <div class='form-error'>
     <% if flash[:notice] %>
