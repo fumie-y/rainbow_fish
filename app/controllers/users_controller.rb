@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       password: params[:user][:password],
       password_confirmation: params[:user][:password_confirmation],
     )
-    if password.authenticate?(params[:user][:password]) && @user.save
+    if password_authenticate?(params[:user]) && @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'ユーザー登録が完了しました'
       redirect_to("/users/#{@user.id}")
@@ -97,10 +97,6 @@ class UsersController < ApplicationController
     def password_authenticate?(user)
       user[:password].present? && @user.authenticate(user[:password])
     end
-
-
-
-  # private
 
   # def user_params
   #   params.require(:user).permit(:name, :profile_image, :password, :password_digest)
