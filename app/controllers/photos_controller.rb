@@ -52,7 +52,7 @@ class PhotosController < ApplicationController
     @photo.title = params[:photo][:title]
     @photo.photo_comment = params[:photo][:photo_comment]
     @photo.rgb = params[:photo][:rgb]
-    if @photo.save
+    if title_authenticate?(params[:photo]) && @photo.save
       tag = Tag.find_or_initialize_by(photo_id: @photo.id)
       tag.update_tag(params[:photo][:tags_attributes].values)
       tag.save
@@ -72,7 +72,12 @@ class PhotosController < ApplicationController
   end
 
 
-  # private
+  private
+
+  def title_authenticate?(photo)
+      @photo.authenticate(photo[:title])
+  end
+
   # def search_params
   #   params.require(:q).permit!
   # end
