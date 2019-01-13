@@ -64,9 +64,9 @@
         </div>
       </nav>
     </header>
-    <% if flash[:notice] %>
+    <% if flash.now[:notice] %>
       <p class="alert alert-success" role="alert">
-        <%= flash[:notice] %>
+        <%= flash.now[:notice] %>
       </p>
     <% end %>
     <div style="background-color: #fbfafa;">

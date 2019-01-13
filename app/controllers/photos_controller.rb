@@ -31,7 +31,7 @@ class PhotosController < ApplicationController
         photo_id: @photo.id
         )
         if @tag.save
-          flash[:notice] = '写真を投稿しました'
+          flash.now[:notice] = '写真を投稿しました'
           redirect_to("/photos")
         else
           render("photos/new")
@@ -56,9 +56,10 @@ class PhotosController < ApplicationController
       tag = Tag.find_or_initialize_by(photo_id: @photo.id)
       tag.update_tag(params[:photo][:tags_attributes].values)
       tag.save
-      flash[:notice] = '写真を編集しました'
+      flash.now[:notice] = '写真を編集しました'
       redirect_to("/photos/#{@photo.id}")
     else
+      @error_message = 'タイトルは必ず入力して下さい'
       render("/photos/#{@photo.id}/edit")
     end
   end
@@ -66,7 +67,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.destroy
-    flash[:notice] = '写真を削除しました'
+    flash.now[:notice] = '写真を削除しました'
     redirect_to("/photos")
   end
 
@@ -79,7 +80,7 @@ class PhotosController < ApplicationController
   def ensure_correct_user
     @photo = Photo.find(params[:id])
     if @photo.user_id != @current_user.id
-      flash[:notice] = '権限がありません'
+      flash.now[:notice] = '権限がありません'
       redirect_to("/photos")
     end
 

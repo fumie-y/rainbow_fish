@@ -20,26 +20,24 @@
           <% end %>
         </li>
       </ul>
-        <!-- TODO: 画像の大きさをCSSで調整する（四角にする） -->
       <div class='user-edit-place mt-3'>
         <div class='profile-image-box'>
           <div class='row'>
             <div class="card-deck">
-              <div class="col-lg-3">
+              <div class="mx-4" style="width: 15rem;">
                 <div class="card img-thumbnail">
-                  <% if @user.profile_image.blank? %>
-                    <%= image_tag "/user_images/default_user.jpg" %>
-                  <% else %>
-                    <%= image_tag @user.profile_image.url %>
-                  <% end %>
-                  <div class="card-body text-center">
+                  <div class='text-center'>
+                    <% if @user.profile_image.blank? %>
+                      <%= image_tag "/user_images/default_user.jpg", :size => "200x200" %>
+                    <% else %>
+                      <%= image_tag @user.profile_image.url %>
+                    <% end %>
                     <h4 class="card-title text-center"><%= @user.name %></h4>
                   </div>
                 </div>
               </div>
-              <!-- TODO: 時間あればcardの長さを左側と揃える（長さを下に伸ばす） -->
-              <div class="user-edit-box col-lg-9">
-                <div class="card img-thumbnail">
+              <div class="mx-4" style="width: 50rem;">
+                <div class="card img-thumbnail px-5">
                   <div class="card-title">
                     <ul class="nav nav-tabs">
                       <li class="nav-item">
@@ -68,7 +66,7 @@
                         <%= u.label :profile_image, 'プロフィール画像' %>
                         <%= u.file_field :profile_image %>
                       </div>
-                      <%= u.submit :class => " mt-5 btn btn-primary btn-block" %>
+                      <%= u.submit :class => " my-5 btn btn-primary btn-block" %>
                     <% end %>
                   </div>
                 </div>

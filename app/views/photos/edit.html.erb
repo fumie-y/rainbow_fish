@@ -1,12 +1,17 @@
 <div class='photo-edit'>
+  <% if @error_message %>
+    <p class="alert alert-danger" role="alert">
+      <%= @error_message %>
+    </p>
+  <% end %>
   <div class='mt-5'>
     <div class='photo-edit-elements container'>
       <h4 class="border-bottom">写真編集画面</h4>
       <div class='photo-edit-box'>
-        <div class='card' style="width: 40rem; height: 60rem;">
+        <div class='card' style="width: 30rem;">
           <div class='card-body text-center'>
-          <%= image_tag "#{@photo.image}", :class => "img-thumbnail" %>
-        </div>
+            <%= image_tag "#{@photo.image}", :class => "img-thumbnail" %>
+          </div>
         <div class="card-body h5 pl-5">
           <%= form_for (@photo) do |p| %>
             <div class='form-group'>
