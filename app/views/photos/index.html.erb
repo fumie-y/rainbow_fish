@@ -10,7 +10,7 @@
       <div class="card-deck my-5 mx-3">
         <% @photos.each do |photo| %>
           <div class="card-deck">
-            <div class="card">
+            <div class="card img-thumbnail">
               <%= link_to "/photos/#{photo.id}" do %>
                 <%= image_tag photo.image.thumb.url %>
               <% end %>
@@ -42,8 +42,10 @@
             </div>
           </div>
         <% end %>
+        <div class='mt-3'>
+          <%= paginate @photos %>
+        </div>
       </div>
-      <%= paginate @photos %>
     </div>
   </div>
 </div>

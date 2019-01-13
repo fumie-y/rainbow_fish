@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # indexはURL => /usersで表示される
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(10).order('created_at DESC')
   end
 
   def show

@@ -26,13 +26,15 @@
             <div class="card-deck">
               <div class="mx-4" style="width: 15rem;">
                 <div class="card img-thumbnail">
-                  <div class='text-center'>
+                  <div class='text-center mt-1'>
                     <% if @user.profile_image.blank? %>
                       <%= image_tag "/user_images/default_user.jpg", :size => "200x200" %>
                     <% else %>
-                      <%= image_tag @user.profile_image.url %>
+                      <%= image_tag @user.profile_image.thumb200.url %>
                     <% end %>
-                    <h4 class="card-title text-center"><%= @user.name %></h4>
+                    <div class='card-body'>
+                      <h4 class="card-title"><%= @user.name %></h4>
+                    </div>
                   </div>
                 </div>
               </div>
