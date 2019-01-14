@@ -52,7 +52,7 @@ class PhotosController < ApplicationController
     @photo.title = params[:photo][:title]
     @photo.photo_comment = params[:photo][:photo_comment]
     @photo.rgb = params[:photo][:rgb]
-    if title_authenticate?(params[:photo]) && @photo.save
+    if @photo.save
       tag = Tag.find_or_initialize_by(photo_id: @photo.id)
       tag.update_tag(params[:photo][:tags_attributes].values)
       tag.save
@@ -60,7 +60,7 @@ class PhotosController < ApplicationController
       redirect_to("/photos/#{@photo.id}")
     else
       @error_message = 'タイトルは必ず入力して下さい'
-      render("/photos/#{@photo.id}/edit")
+      render :edit
     end
   end
 
@@ -72,11 +72,7 @@ class PhotosController < ApplicationController
   end
 
 
-  private
-
-  def title_authenticate?(photo)
-      @photo.authenticate(photo[:title])
-  end
+  # private
 
   # def search_params
   #   params.require(:q).permit!
