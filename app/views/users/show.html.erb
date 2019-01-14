@@ -15,8 +15,7 @@
           <% end %>
         </li>
       </ul>
-      <!-- TODO: cardサイズはphoto.indexでgem導入済み、マージ後再度試す -->
-      <div class='card-deck mt-3'>
+      <div class='card-deck mt-3 mx-3'>
         <% @user_posted_photos.each do |p| %>
           <div class='card-deck'>
             <div class='card'>
@@ -34,13 +33,9 @@
               <div>
                 <p class='card-text'>
                   <% if p.likes.find_by(user_id: @current_user.id) %>
-                    <%#= link_to("/likes/#{p.id}/destroy", {method: "delete"}) do %>
                       <span class="fa fa-heart like-btn-unlike text-danger"></span>
-                    <%# end %>
                   <% else %>
-                    <%#= link_to("/likes/#{p.id}/create", {method: "post"}) do %>
                       <span class="fa fa-heart like-btn text-secondary"></span>
-                    <%# end %>
                   <% end %>
                   <%= p.likes.count %>
                 </p>
