@@ -11,10 +11,12 @@
         <% @photos.each do |photo| %>
           <div class="card-deck">
             <div class="card img-thumbnail">
-              <%= link_to "/photos/#{photo.id}" do %>
-                <%= image_tag photo.image.thumb.url %>
-              <% end %>
-              <div class="card-body">
+              <div class='text-center'>
+                <%= link_to "/photos/#{photo.id}" do %>
+                  <%= image_tag photo.image.thumb.url %>
+                <% end %>
+              </div>
+              <div class="card-body ml-4">
                 <h4 class="card-title">
                   <%= link_to(photo.title, "/photos/#{photo.id}") %>
                 </h4>
