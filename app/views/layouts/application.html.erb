@@ -64,9 +64,14 @@
         </div>
       </nav>
     </header>
-
+    <% if flash.now[:notice] %>
+      <p class="alert alert-success" role="alert">
+        <%= flash.now[:notice] %>
+      </p>
+    <% end %>
     <div style="background-color: #fbfafa;">
       <%=  yield %>
     </div>
+
   </body>
 </html>

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # indexはURL => /usersで表示される
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(10).order('created_at DESC')
   end
 
   def show
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     )
     if password_authenticate?(params[:user]) && @user.save
       session[:user_id] = @user.id
-      flash[:notice] = 'ユーザー登録が完了しました'
+      flash.now[:notice] = 'ユーザー登録が完了しました'
       redirect_to("/users/#{@user.id}")
     else
       @error_message = '再度どちらも入力して下さい'
@@ -48,10 +48,10 @@ class UsersController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
     @user.profile_image = params[:user][:profile_image]
     if @user.save
-      flash[:notice] = 'ユーザー情報を編集しました'
+      flash.now[:notice] = 'ユーザー情報を編集しました'
       redirect_to("/users/#{@user.id}")
     else
-      flash[:notice] = 'ユーザー情報の編集に失敗しました'
+      @error_message = 'ユーザー情報を入力して下さい'
       render :edit
     end
   end
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     @user = User.find_by(name: params[:user][:name])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-      flash[:notice] = 'ログインしました'
+      flash.now[:notice] = 'ログインしました'
       redirect_to("/photos")
     else
       @error_message = "再度どちらも入力して下さい"
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id] = nil
-    flash[:notice] = 'ログアウトしました'
+    flash.now[:notice] = 'ログアウトしました'
     redirect_to("/login")
   end
 
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      flash[:notice] = 'ユーザーを削除しました'
+      flash.now[:notice] = 'ユーザーを削除しました'
       redirect_to("/login")
     else
       render("/users/#{@user.id}/destroy_form")
@@ -98,17 +98,13 @@ class UsersController < ApplicationController
       user[:password].present? && @user.authenticate(user[:password])
     end
 
-
-
-  # private
-
   # def user_params
   #   params.require(:user).permit(:name, :profile_image, :password, :password_digest)
   # end
 
   def ensure_correct_user
     if params[:id].to_i != @current_user.id
-      flash[:notice] = '権限がありません'
+      flash.now[:notice] = '権限がありません'
       redirect_to("/photos")
     end
   end
